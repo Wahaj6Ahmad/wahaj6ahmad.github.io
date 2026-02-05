@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wahaj — Portfolio</title>
+  <meta name="description" content="Engineering portfolio of Wahaj." />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Wahaj</a>
+
+    <nav class="nav">
+      <a class="nav-link is-active" href="/">Home</a>
+      <a class="nav-link" href="/resume/">Resume</a>
+      <a class="nav-link" href="/work-experience/">Work Experience</a>
+      <a class="nav-link" href="/projects/">Projects</a>
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-link" href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <img
+        class="avatar"
+        src="/assets/img/profile.jpg"
+        alt="Portrait of Wahaj"
+        loading="lazy"
+      />
+
+      <div class="hero-text">
+        <h1>Hi, I’m Wahaj.</h1>
+        <p class="lead">
+          Welcome to my engineering portfolio.
+        </p>
+
+        <p>
+          I like building interactive systems that feel reliable, responsive, and fun.
+          I care about practical work: testing, iteration, and making things usable.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn" href="/projects/">See projects</a>
+          <a class="btn btn-ghost" href="/resume/">View resume</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© <span id="year"></span> Wahaj</span>
+      <span class="muted">Built with GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
