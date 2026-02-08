@@ -143,6 +143,16 @@ a:hover { text-decoration: underline; }
 
 .muted { color: var(--muted); }
 
+/* Figure captions (used on project pages) */
+.caption {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
 @media (max-width: 720px) {
   .home-hero {
     grid-template-columns: 1fr;
