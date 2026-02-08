@@ -193,6 +193,38 @@ a:hover { text-decoration: underline; }
   padding: 14px;
 } */
 
+/* Reusable media block (works for landscape + portrait) */
+.media-block {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+}
+
+.media-block img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Caption bar */
+.media-block .caption {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Optional: for big header images, keep a nice max height and crop */
+.media-block.landscape-crop img {
+  height: min(520px, 56vh);
+  object-fit: cover;
+}
+
+
 @media (max-width: 720px) {
   .home-hero {
     grid-template-columns: 1fr;
