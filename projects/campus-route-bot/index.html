@@ -101,12 +101,53 @@
       margin-top: 14px;
       max-width: 980px;
     }
-    summary {
+    /* Collapsible header styling (summary) */
+    details summary {
       cursor: pointer;
-      font-weight: 700;
+      font-weight: 800;
       list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    
+      padding: 10px 12px;
+      border-radius: 12px;
+    
+      /* makes it feel interactive */
+      text-decoration: none;
     }
-    summary::-webkit-details-marker { display: none; }
+    
+    details summary::-webkit-details-marker { display: none; }
+    
+    /* Hover = underline + subtle highlight */
+    details summary:hover {
+      text-decoration: underline;
+      background: rgba(255,255,255,0.04);
+    }
+    
+    /* Keyboard focus (accessibility) */
+    details summary:focus-visible {
+      outline: 2px solid rgba(125,211,252,0.45);
+      outline-offset: 2px;
+    }
+    
+    /* Right-side chevron */
+    .details-chev {
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      color: var(--muted);
+      transition: transform 180ms ease, color 180ms ease;
+    }
+    
+    /* Rotate chevron when open */
+    details[open] .details-chev {
+      transform: rotate(180deg);
+      color: var(--text);
+    }
+
+    /* summary::-webkit-details-marker { display: none; } */
 
     .details-inner { margin-top: 12px; }
 
