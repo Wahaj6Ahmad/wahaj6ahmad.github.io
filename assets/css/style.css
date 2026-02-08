@@ -153,7 +153,7 @@ a:hover { text-decoration: underline; }
   font-size: 14px;
 }
 /* Reusable figure styles for project pages */
-.figure {
+/* .figure {
   margin-top: 14px;
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -173,17 +173,17 @@ a:hover { text-decoration: underline; }
 }
 
 /* Wide photo: image crops nicely, caption never gets clipped */
-.figure-wide {
+/* .figure-wide {
   aspect-ratio: 16 / 9;
   max-height: 520px;
 }
 
 .figure-wide img {
   object-fit: cover;
-}
+} */
 
 /* Diagram: keep full diagram visible */
-.figure-diagram {
+/* .figure-diagram {
   aspect-ratio: 16 / 9;
   max-height: 520px;
 }
@@ -191,7 +191,7 @@ a:hover { text-decoration: underline; }
 .figure-diagram img {
   object-fit: contain;
   padding: 14px;
-}
+} */
 
 @media (max-width: 720px) {
   .home-hero {
