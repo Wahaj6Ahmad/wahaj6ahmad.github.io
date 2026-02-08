@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="/assets/css/style.css" />
 
   <style>
-    /* Page-local styles (keeps your global CSS clean) */
     .page-wrap { padding: 42px 0; }
     .backlink { display: inline-block; margin-bottom: 10px; }
+
     .hero {
-      margin-top: 8px;
+      margin-top: 14px;
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 18px;
       overflow: hidden;
@@ -30,6 +30,7 @@
       color: var(--muted);
       font-size: 14px;
     }
+
     .section {
       margin-top: 26px;
       max-width: 860px;
@@ -39,15 +40,7 @@
       font-size: 28px;
       line-height: 1.15;
     }
-    .card {
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 16px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.03);
-      padding: 16px;
-      margin-top: 14px;
-      max-width: 980px;
-    }
+
     .video {
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 16px;
@@ -55,6 +48,7 @@
       background: rgba(255,255,255,0.03);
       aspect-ratio: 16 / 9;
       margin-top: 12px;
+      max-width: 980px;
     }
     .video iframe {
       width: 100%;
@@ -62,6 +56,7 @@
       border: 0;
       display: block;
     }
+
     details {
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 16px;
@@ -76,6 +71,7 @@
       list-style: none;
     }
     summary::-webkit-details-marker { display: none; }
+
     .details-inner { margin-top: 12px; }
     .minihead {
       margin: 14px 0 8px 0;
@@ -96,19 +92,24 @@
       background: rgba(255,255,255,0.02);
       margin-top: 10px;
     }
-    .tagrow {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
+
+    .see-less-row {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.10);
     }
-    .tag {
+    .see-less-btn {
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 13px;
+      background: rgba(255,255,255,0.04);
       color: var(--muted);
-      background: rgba(255,255,255,0.03);
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .see-less-btn:hover {
+      border-color: rgba(125,211,252,0.5);
+      color: var(--text);
     }
   </style>
 </head>
@@ -130,20 +131,12 @@
     <a class="backlink muted" href="/projects/">← Back to Projects</a>
 
     <h1 style="margin: 0 0 6px 0;">Roboception</h1>
-    <p class="lead" style="margin: 0 0 6px 0; color: var(--muted); font-size: 18px;">
+    <p class="lead" style="margin: 0; color: var(--muted); font-size: 18px;">
       A cardboard, voice-only receptionist robot that gives office directions
     </p>
 
-    <div class="tagrow" aria-label="Project tags">
-      <span class="tag">Mechatronics</span>
-      <span class="tag">HRI</span>
-      <span class="tag">Voice-only</span>
-      <span class="tag">State machine</span>
-    </div>
-
     <!-- Main photo -->
     <figure class="hero" style="margin: 18px 0 0 0;">
-      <!-- Replace src with your real image -->
       <img src="/assets/img/projects/campus-route-bot.jpg" alt="Roboception robot photo" loading="lazy" />
       <figcaption class="caption">Roboception in all its glory</figcaption>
     </figure>
@@ -159,21 +152,19 @@
 
       <p>
         That constraint forced me to focus on something I care about as a future roboticist:
-        making interaction reliable and understandable, even when the robot has very little to work with.
+        making interaction reliable and understandable even when the robot has very little to work with.
       </p>
 
-      <!-- Demo video -->
       <h2 style="margin-top: 18px;">Demo</h2>
-      <p class="muted" style="margin: 0;">
+      <!-- <p class="muted" style="margin: 0;">
         20–40s demo video — user says “hello” → asks for an instructor → gets room number → chooses detailed directions →
         robot says goodbye + resets
-      </p>
+      </p> -->
 
-      <!-- Replace VIDEO_ID with your YouTube ID (or swap iframe src to Vimeo). -->
       <div class="video" aria-label="Demo video embed">
         <iframe
-          src="https://www.youtube.com/embed/VIDEO_ID"
-          title="Roboception demo video"
+          src="https://youtube.com/shorts/ksJNwvBE9w8?feature=share"
+          title="Roboception demo video."
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
@@ -182,7 +173,7 @@
 
       <p style="margin-top: 12px;">
         This started as a course assignment and turned into me obsessing over blink animations.
-        In the end, I had to settle with the basic blinks.
+        In the end, I had to settle for the basic blinks.
       </p>
     </section>
 
@@ -191,12 +182,11 @@
       <p>
         The interaction starts the same way every time: you say “hello”, Roboception introduces itself,
         then it listens for an instructor's name or room number. If it recognizes the name, it gives you
-        the office number and asks if you want step-by-step directions. Say “yes,” and it explains the route,
+        the office number and asks if you want step-by-step directions. Say “yes” and it explains the route,
         says goodbye, and resets like a polite little NPC.
       </p>
 
-      <!-- Collapsible 1 -->
-      <details>
+      <details data-collapsible>
         <summary>Technical details</summary>
         <div class="details-inner">
           <h3 style="margin: 0 0 10px 0;">Interaction logic (voice-only design)</h3>
@@ -213,7 +203,7 @@
 
           <p>
             I intentionally kept the interaction simple and task-focused. In testing, this design choice mattered:
-            Participants reported it was clear what to say at each step, and they rarely felt lost during the conversation.
+            participants reported it was clear what to say at each step, and they rarely felt lost during the conversation.
           </p>
 
           <hr class="divider" />
@@ -243,11 +233,14 @@
             <li>LED eye animation via MCU control</li>
             <li>Rapid physical prototyping (cardboard build, speaker integration, presentation as a “reception desk”)</li>
           </ul>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
         </div>
       </details>
 
-      <!-- Collapsible 2 -->
-      <details>
+      <details data-collapsible>
         <summary>Evaluations + learnings</summary>
         <div class="details-inner">
           <h3 style="margin: 0 0 10px 0;">Evaluation (what we tested and what we observed)</h3>
@@ -276,6 +269,10 @@
             <li>Add non-semantic cues (short sounds) to signal “I’m done speaking / I’m listening / I’m thinking” to reduce anxiety during pauses.</li>
             <li>Replace the laptop mic with more dedicated audio hardware to make the robot feel more independent and reliable.</li>
           </ul>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
         </div>
       </details>
     </section>
@@ -302,7 +299,17 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // "See less" buttons: collapse the parent <details>
+    document.querySelectorAll("[data-see-less]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const details = e.target.closest("details");
+        if (details) details.removeAttribute("open");
+        // Optional: scroll summary into view so it's obvious the section collapsed
+        const summary = details ? details.querySelector("summary") : null;
+        if (summary) summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    });
   </script>
 </body>
 </html>
-
