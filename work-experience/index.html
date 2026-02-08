@@ -8,17 +8,8 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">Wahaj</a>
-    <nav class="nav">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="/resume/">Resume</a>
-      <a class="nav-link is-active" href="/work-experience/">Work Experience</a>
-      <a class="nav-link" href="/projects/">Projects</a>
-      <a class="nav-link" href="/about/">About</a>
-      <a class="nav-link" href="/contact/">Contact</a>
-    </nav>
-  </header>
+  <div id="siteHeader"></div>
+
 
   <main class="container" style="padding: 42px 0;">
     <h1>Work Experience</h1>
@@ -35,6 +26,9 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <div id="siteFooter"></div>
+  <script src="/assets/js/layout.js" defer></script>
+
 </body>
 </html>
 
