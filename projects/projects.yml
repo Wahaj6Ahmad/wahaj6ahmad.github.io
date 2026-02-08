@@ -1,1 +1,51 @@
-i will edit this to change order, titles, tags, images, links.
+# Edit this file to change project order, titles, tags, and thumbnails.
+# The order in this list is the order shown on the page.
+
+projects:
+  - title: "MSc Thesis: Exploring the design potential of hand gestures for fighting games through Wizard-of-Oz"
+    year: 2026
+    slug: "masters-thesis"
+    tags: ["research"]
+    thumbnail: "/assets/img/projects/masters-thesis.jpg"
+
+  - title: "BSc Thesis: Autonomous Robot With Door Opening Mechanism and Traversal"
+    year: 2020
+    slug: "bachelors-thesis-door-robot"
+    tags: ["mechatronics"]
+    thumbnail: "/assets/img/projects/bachelors-thesis-door-robot.jpg"
+
+  - title: "VR/AR System for Remote Factory Support"
+    year: 2023
+    slug: "vr-ar-remote-factory"
+    tags: ["mechatronics"]
+    thumbnail: "/assets/img/projects/vr-ar-remote-factory.jpg"
+
+  - title: "Impact of a Robot’s Emotion Expressing Modality on People’s Cooperative Behaviour"
+    year: 2022
+    slug: "robot-emotion-cooperation"
+    tags: ["research"]
+    thumbnail: "/assets/img/projects/robot-emotion-cooperation.jpg"
+
+  - title: "Chatbot: Implicit User Preference Modeling and Knowledge Graph Integration (RASA + Neo4j)"
+    year: 2021
+    slug: "rasa-neo4j-chatbot"
+    tags: ["nlp", "research", "other"]
+    thumbnail: "/assets/img/projects/rasa-neo4j-chatbot.jpg"
+
+  - title: "Analyzing Reddit Sentiment and Geopolitical Stance on Israel–Palestine (post Oct 7, 2023)"
+    year: 2024
+    slug: "reddit-israel-palestine"
+    tags: ["nlp", "research", "other"]
+    thumbnail: "/assets/img/projects/reddit-israel-palestine.jpg"
+
+  - title: "SquidMind — a Color Memorization Robot"
+    year: 2022
+    slug: "squidmind"
+    tags: ["mechatronics"]
+    thumbnail: "/assets/img/projects/squidmind.jpg"
+
+  - title: "Campus Route Bot"
+    year: 2022
+    slug: "campus-route-bot"
+    tags: ["mechatronics"]
+    thumbnail: "/assets/img/projects/campus-route-bot.jpg"
