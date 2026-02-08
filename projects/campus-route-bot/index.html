@@ -1,1 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roboception — Wahaj</title>
+  <meta name="description" content="Roboception: a cardboard, voice-only receptionist robot that gives office directions." />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <style>
+    /* Page-local styles (keeps your global CSS clean) */
+    .page-wrap { padding: 42px 0; }
+    .backlink { display: inline-block; margin-bottom: 10px; }
+    .hero {
+      margin-top: 8px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+    }
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .caption {
+      padding: 10px 14px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .section {
+      margin-top: 26px;
+      max-width: 860px;
+    }
+    .section h2 {
+      margin: 0 0 10px 0;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+    .card {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      padding: 16px;
+      margin-top: 14px;
+      max-width: 980px;
+    }
+    .video {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      aspect-ratio: 16 / 9;
+      margin-top: 12px;
+    }
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    details {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      padding: 14px 14px;
+      margin-top: 14px;
+      max-width: 980px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .details-inner { margin-top: 12px; }
+    .minihead {
+      margin: 14px 0 8px 0;
+      font-weight: 700;
+    }
+    .bullets { margin: 8px 0 0 18px; }
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.10);
+      margin: 14px 0;
+      border: 0;
+    }
+    .placeholder {
+      border: 1px dashed rgba(255,255,255,0.20);
+      border-radius: 14px;
+      padding: 14px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.02);
+      margin-top: 10px;
+    }
+    .tagrow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .tag {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Wahaj</a>
+    <nav class="nav">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/resume/">Resume</a>
+      <a class="nav-link" href="/work-experience/">Work Experience</a>
+      <a class="nav-link is-active" href="/projects/">Projects</a>
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-link" href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container page-wrap">
+    <a class="backlink muted" href="/projects/">← Back to Projects</a>
+
+    <h1 style="margin: 0 0 6px 0;">Roboception</h1>
+    <p class="lead" style="margin: 0 0 6px 0; color: var(--muted); font-size: 18px;">
+      A cardboard, voice-only receptionist robot that gives office directions
+    </p>
+
+    <div class="tagrow" aria-label="Project tags">
+      <span class="tag">Mechatronics</span>
+      <span class="tag">HRI</span>
+      <span class="tag">Voice-only</span>
+      <span class="tag">State machine</span>
+    </div>
+
+    <!-- Main photo -->
+    <figure class="hero" style="margin: 18px 0 0 0;">
+      <!-- Replace src with your real image -->
+      <img src="/assets/img/projects/campus-route-bot.jpg" alt="Roboception robot photo" loading="lazy" />
+      <figcaption class="caption">Roboception in all its glory</figcaption>
+    </figure>
+
+    <section class="section">
+      <p>
+        I built Roboception in the Human-Robot Communication course at the University of Twente
+        (Challenge 1, Sept 2022). The whole point of the course was to learn how robots should
+        communicate with people through different modalities. For this challenge, we were only
+        allowed to use sound and voice. No screens. No buttons. No gestures. Just a robot that has
+        to survive on conversation alone (like a receptionist on their first day).
+      </p>
+
+      <p>
+        That constraint forced me to focus on something I care about as a future roboticist:
+        making interaction reliable and understandable, even when the robot has very little to work with.
+      </p>
+
+      <!-- Demo video -->
+      <h2 style="margin-top: 18px;">Demo</h2>
+      <p class="muted" style="margin: 0;">
+        20–40s demo video — user says “hello” → asks for an instructor → gets room number → chooses detailed directions →
+        robot says goodbye + resets
+      </p>
+
+      <!-- Replace VIDEO_ID with your YouTube ID (or swap iframe src to Vimeo). -->
+      <div class="video" aria-label="Demo video embed">
+        <iframe
+          src="https://www.youtube.com/embed/VIDEO_ID"
+          title="Roboception demo video"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <p style="margin-top: 12px;">
+        This started as a course assignment and turned into me obsessing over blink animations.
+        In the end, I had to settle with the basic blinks.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>What the robot does</h2>
+      <p>
+        The interaction starts the same way every time: you say “hello”, Roboception introduces itself,
+        then it listens for an instructor's name or room number. If it recognizes the name, it gives you
+        the office number and asks if you want step-by-step directions. Say “yes,” and it explains the route,
+        says goodbye, and resets like a polite little NPC.
+      </p>
+
+      <!-- Collapsible 1 -->
+      <details>
+        <summary>Technical details</summary>
+        <div class="details-inner">
+          <h3 style="margin: 0 0 10px 0;">Interaction logic (voice-only design)</h3>
+
+          <div class="placeholder">
+            PLACE: Flow chart/state machine figure — use the interaction design diagram from the report
+          </div>
+
+          <p style="margin-top: 12px;">
+            We implemented the conversation as a small state machine. The robot waits for an utterance,
+            checks for recognized keywords, and then moves through states for “room number recognized / name recognized,”
+            optionally followed by “detailed directions,” and finally a clear end state (“goodbye” + reset).
+          </p>
+
+          <p>
+            I intentionally kept the interaction simple and task-focused. In testing, this design choice mattered:
+            Participants reported it was clear what to say at each step, and they rarely felt lost during the conversation.
+          </p>
+
+          <hr class="divider" />
+
+          <h3 style="margin: 0 0 10px 0;">System architecture (what’s actually running)</h3>
+
+          <div class="placeholder">
+            PLACE: Software architecture diagram — the “cloud / Google STT / Google TTS / dialogue management / speakers / LEDs” schematic
+          </div>
+
+          <p style="margin-top: 12px;">
+            Most of the processing ran on a laptop using Google Speech-to-Text and Text-to-Speech, with audio input from
+            a microphone and output through speakers. A dialogue management layer handled the flow, and control signals
+            were sent to drive the LED “eyes” through an MCU.
+          </p>
+
+          <p>
+            I also cared about the physical presence. We used hexagonal NeoPixel LEDs with a blinking animation,
+            a cardboard “reception desk” setup, and simple “antennas” and cloth hair to make the robot feel friendly to approach.
+            Participants explicitly commented that the robot looked cute and inviting.
+          </p>
+
+          <h3 style="margin: 14px 0 10px 0;">Tech used</h3>
+          <ul class="bullets">
+            <li>Google Speech-to-Text + Text-to-Speech</li>
+            <li>Dialogue management + state-machine style interaction flow</li>
+            <li>LED eye animation via MCU control</li>
+            <li>Rapid physical prototyping (cardboard build, speaker integration, presentation as a “reception desk”)</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Collapsible 2 -->
+      <details>
+        <summary>Evaluations + learnings</summary>
+        <div class="details-inner">
+          <h3 style="margin: 0 0 10px 0;">Evaluation (what we tested and what we observed)</h3>
+          <p>
+            We tested the robot with four participants, observed their interactions, and conducted brief interviews afterwards.
+          </p>
+
+          <div class="minihead">What worked well</div>
+          <ul class="bullets">
+            <li>The interaction was generally quick and smooth, and the system handled different accents and wording fairly well (example: understanding “not really” as a “no”).</li>
+            <li>Users reported that expectations were met, and that the robot’s instructions made them feel confident about what to do next.</li>
+            <li>Using a quieter environment helped speech recognition accuracy and reduced errors.</li>
+          </ul>
+
+          <div class="minihead">Where it broke (useful failure)</div>
+          <ul class="bullets">
+            <li>Twice, the robot failed to handle small pauses and interrupted the user mid-speech.</li>
+            <li>Long processing pauses made users unsure if the robot heard them or was “stuck.”</li>
+            <li>The conversation had limited “repair.” If a user wanted repetition or back-and-forth clarification, the interaction often had to restart.</li>
+            <li>Some users felt a mismatch between the friendly look and the monotone TTS voice options.</li>
+          </ul>
+
+          <h3 style="margin: 16px 0 10px 0;">What I’d improve next (based on what we saw)</h3>
+          <ul class="bullets">
+            <li>Add repeat/back/clarification support so users can repair misunderstandings without restarting.</li>
+            <li>Add non-semantic cues (short sounds) to signal “I’m done speaking / I’m listening / I’m thinking” to reduce anxiety during pauses.</li>
+            <li>Replace the laptop mic with more dedicated audio hardware to make the robot feel more independent and reliable.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="section">
+      <h2>Why this matters for my robotics path</h2>
+      <p>
+        This project looks simple, but it trained the exact muscles I want to bring into robotics work:
+      </p>
+      <ul class="bullets">
+        <li><strong>HRI under constraints:</strong> designing an interaction that still works when you remove most modalities and leave only speech.</li>
+        <li><strong>Systems integration:</strong> audio I/O, cloud STT/TTS, dialogue/state logic, and hardware feedback (LED control) in one working loop.</li>
+        <li><strong>Testing mindset:</strong> observing real users and treating timing, turn-taking, and repair as engineering problems, not “user mistakes.”</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© <span id="year"></span> Wahaj</span>
+      <span class="muted">Built with GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
