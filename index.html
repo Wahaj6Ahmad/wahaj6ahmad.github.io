@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <header class="site-header">
+  <!-- <header class="site-header">
     <a class="brand" href="/">Wahaj</a>
 
     <nav class="nav">
@@ -20,6 +20,31 @@
       <a class="nav-link" href="/about/">About</a>
       <a class="nav-link" href="/contact/">Contact</a>
     </nav>
+  </header> -->
+  <header class="site-header">
+    <a class="brand" href="/">Wahaj</a>
+  
+    <div class="nav-wrap" id="navWrap">
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="siteNav"
+      >
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+  
+      <nav class="nav" id="siteNav" aria-label="Primary">
+        <a class="nav-link is-active" href="/">Home</a>
+        <a class="nav-link" href="/resume/">Resume</a>
+        <a class="nav-link" href="/work-experience/">Work Experience</a>
+        <a class="nav-link" href="/projects/">Projects</a>
+        <a class="nav-link" href="/about/">About</a>
+        <a class="nav-link" href="/contact/">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main class="container">
@@ -60,5 +85,43 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <script>
+    (function () {
+      const wrap = document.getElementById("navWrap");
+      const toggle = document.getElementById("navToggle");
+      const nav = document.getElementById("siteNav");
+  
+      if (!wrap || !toggle || !nav) return;
+  
+      function setOpen(open) {
+        wrap.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+  
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setOpen(!wrap.classList.contains("is-open"));
+      });
+  
+      // Click outside closes (only matters when pinned open)
+      document.addEventListener("click", (e) => {
+        if (!wrap.classList.contains("is-open")) return;
+        if (!wrap.contains(e.target)) setOpen(false);
+      });
+  
+      // Esc closes
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setOpen(false);
+      });
+  
+      // Optional: close after selecting a link on small screens
+      nav.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+          if (window.matchMedia("(max-width: 860px)").matches) setOpen(false);
+        });
+      });
+    })();
+  </script>
+
 </body>
 </html>
