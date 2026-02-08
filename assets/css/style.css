@@ -509,7 +509,6 @@ details[open] > summary .details-chev {
   .avatar { width: 120px; height: 120px; }
   .hero-text h1 { font-size: 32px; }
 }
-
 /* =========================
    Responsive nav (hamburger)
    ========================= */
@@ -527,17 +526,15 @@ details[open] > summary .details-chev {
   cursor: pointer;
 }
 
-.nav-toggle:hover {
-  border-color: rgba(125,211,252,0.5);
-}
+.nav-toggle:hover { border-color: rgba(125,211,252,0.5); }
 
+/* 3-line icon */
 .nav-toggle-icon {
   width: 18px;
   height: 14px;
   display: inline-block;
   position: relative;
 }
-
 .nav-toggle-icon::before,
 .nav-toggle-icon::after,
 .nav-toggle-icon span {
@@ -549,17 +546,12 @@ details[open] > summary .details-chev {
   background: currentColor;
   border-radius: 999px;
 }
-
 .nav-toggle-icon::before { top: 0; }
 .nav-toggle-icon::after  { bottom: 0; }
-.nav-toggle-icon span     { top: 6px; }
+.nav-toggle-icon span { top: 6px; display: block; }
 
-/* The middle bar */
-.nav-toggle-icon span { display: block; }
-
-/* Narrow view behavior */
-@media (max-width: 860px) {
-  /* show hamburger */
+/* Use a higher breakpoint so split-screen triggers hamburger */
+@media (max-width: 1100px) {
   .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
 
   /* hide inline nav by default */
@@ -581,21 +573,24 @@ details[open] > summary .details-chev {
     z-index: 50;
   }
 
-  /* menu opens on hover (temporary) */
-  .nav-wrap:hover .nav {
-    display: flex;
-  }
+  /* Open when pinned via click */
+  .nav-wrap.is-open .nav { display: flex; }
 
-  /* menu opens when pinned via click */
-  .nav-wrap.is-open .nav {
-    display: flex;
-  }
-
-  /* make links look good in dropdown */
   .site-header .nav-link {
     padding: 10px 12px;
     border-radius: 12px;
   }
+  .site-header .nav-link:hover {
+    background: rgba(255,255,255,0.04);
+    text-decoration: none;
+  }
+}
+
+/* Hover-to-open ONLY on hover-capable devices */
+@media (hover: hover) and (pointer: fine) and (max-width: 1100px) {
+  .nav-wrap:hover .nav { display: flex; }
+}
+
 
   .site-header .nav-link:hover {
     background: rgba(255,255,255,0.04);
