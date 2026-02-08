@@ -4,7 +4,114 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects — Wahaj</title>
+  <meta name="description" content="Projects by Wahaj." />
   <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <style>
+    /* Page-local styles to match your tile look */
+    .page-title {
+      font-size: 44px;
+      line-height: 1.1;
+      margin: 0 0 10px 0;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0 22px 0;
+    }
+
+    .chip {
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .chip:hover {
+      border-color: rgba(125,211,252,0.5);
+    }
+
+    .chip.is-active {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 26px;
+      padding-bottom: 10px;
+    }
+
+    .tile {
+      display: block;
+      text-decoration: none;
+    }
+
+    .thumb {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      aspect-ratio: 16 / 10;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.001);
+      transition: transform 180ms ease;
+    }
+
+    .tile:hover .thumb img {
+      transform: scale(1.03);
+    }
+
+    .tile-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 12px;
+      align-items: baseline;
+    }
+
+    .tile-title {
+      font-size: 28px;
+      line-height: 1.05;
+      margin: 0;
+      max-width: 85%;
+    }
+
+    .tile-year {
+      font-size: 20px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .empty {
+      margin-top: 16px;
+      color: var(--muted);
+      display: none;
+    }
+
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 36px; }
+      .tile-title { font-size: 24px; }
+    }
+  </style>
+
+  <!-- YAML parser (client-side). Works fine on GitHub Pages. -->
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 </head>
 
 <body>
@@ -21,8 +128,13 @@
   </header>
 
   <main class="container" style="padding: 42px 0;">
-    <h1>Projects</h1>
-    <p class="muted">Coming soon. This page will list 3–5 curated projects with links to notes and repos.</p>
+    <h1 class="page-title">Click project photos below to learn more!</h1>
+
+    <div id="filters" class="filters" aria-label="Project filters"></div>
+
+    <section id="grid" class="grid" aria-label="Project grid"></section>
+
+    <p id="empty" class="empty">No projects match this filter.</p>
   </main>
 
   <footer class="site-footer">
@@ -34,7 +146,136 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const FILTER_ALL = "all";
+    let allProjects = [];
+    let activeFilter = FILTER_ALL;
+
+    function normalizeTag(tag) {
+      return String(tag || "").trim().toLowerCase();
+    }
+
+    function titleCase(tag) {
+      const t = normalizeTag(tag);
+      if (!t) return "";
+      return t.charAt(0).toUpperCase() + t.slice(1);
+    }
+
+    function projectMatchesFilter(p, filter) {
+      if (filter === FILTER_ALL) return true;
+      const tags = (p.tags || []).map(normalizeTag);
+      return tags.includes(normalizeTag(filter));
+    }
+
+    function renderFilters(projects) {
+      const filtersEl = document.getElementById("filters");
+      filtersEl.innerHTML = "";
+
+      // Collect unique tags in the order they appear in YAML (stable + predictable).
+      const seen = new Set();
+      const tagsInOrder = [];
+      for (const p of projects) {
+        for (const tag of (p.tags || [])) {
+          const key = normalizeTag(tag);
+          if (key && !seen.has(key)) {
+            seen.add(key);
+            tagsInOrder.push(key);
+          }
+        }
+      }
+
+      const filters = [FILTER_ALL, ...tagsInOrder];
+
+      for (const f of filters) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip" + (f === activeFilter ? " is-active" : "");
+        btn.dataset.filter = f;
+        btn.textContent = (f === FILTER_ALL) ? "All" : titleCase(f);
+        btn.addEventListener("click", () => {
+          activeFilter = f;
+          renderFilters(allProjects);
+          renderGrid(allProjects);
+        });
+        filtersEl.appendChild(btn);
+      }
+    }
+
+    function renderGrid(projects) {
+      const gridEl = document.getElementById("grid");
+      const emptyEl = document.getElementById("empty");
+
+      gridEl.innerHTML = "";
+
+      const filtered = projects.filter(p => projectMatchesFilter(p, activeFilter));
+
+      if (filtered.length === 0) {
+        emptyEl.style.display = "block";
+        return;
+      } else {
+        emptyEl.style.display = "none";
+      }
+
+      for (const p of filtered) {
+        const a = document.createElement("a");
+        a.className = "tile";
+        a.href = `/projects/${p.slug}/`;
+
+        const thumb = document.createElement("div");
+        thumb.className = "thumb";
+
+        const img = document.createElement("img");
+        img.src = p.thumbnail || "";
+        img.alt = p.title ? `Thumbnail for ${p.title}` : "Project thumbnail";
+        img.loading = "lazy";
+
+        thumb.appendChild(img);
+
+        const meta = document.createElement("div");
+        meta.className = "tile-meta";
+
+        const h3 = document.createElement("h3");
+        h3.className = "tile-title";
+        h3.textContent = p.title || "Untitled Project";
+
+        const year = document.createElement("div");
+        year.className = "tile-year";
+        year.textContent = p.year || "";
+
+        meta.appendChild(h3);
+        meta.appendChild(year);
+
+        a.appendChild(thumb);
+        a.appendChild(meta);
+
+        gridEl.appendChild(a);
+      }
+    }
+
+    async function loadProjectsYml() {
+      const res = await fetch("/projects/projects.yml", { cache: "no-store" });
+      if (!res.ok) throw new Error(`Failed to load projects.yml (${res.status})`);
+      const text = await res.text();
+      const data = jsyaml.load(text);
+
+      if (!data || !Array.isArray(data.projects)) {
+        throw new Error("projects.yml must contain a top-level 'projects:' list.");
+      }
+      return data.projects;
+    }
+
+    (async function init() {
+      try {
+        allProjects = await loadProjectsYml();
+        renderFilters(allProjects);
+        renderGrid(allProjects);
+      } catch (err) {
+        console.error(err);
+        const emptyEl = document.getElementById("empty");
+        emptyEl.style.display = "block";
+        emptyEl.textContent = "Could not load projects. Check console for details.";
+      }
+    })();
   </script>
 </body>
 </html>
-
