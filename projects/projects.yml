@@ -42,7 +42,7 @@ projects:
     year: 2022
     slug: "squidmind"
     tags: ["mechatronics"]
-    thumbnail: "/assets/img/projects/squidmind.jpg"
+    thumbnail: "/assets/img/projects/squidmind/sm_main.jpg"
 
   - title: "Roboception - Campus Route Bot"
     year: 2022
