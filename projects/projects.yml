@@ -48,4 +48,4 @@ projects:
     year: 2022
     slug: "campus-route-bot"
     tags: ["mechatronics"]
-    thumbnail: "assets/img/projects/roboception/close-up.jpg"
+    thumbnail: "/assets/img/projects/roboception/close-up.jpg"
