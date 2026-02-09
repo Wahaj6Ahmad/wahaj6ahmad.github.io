@@ -105,7 +105,7 @@
       for (const p of filtered) {
         const a = document.createElement("a");
         a.className = "tile";
-        a.href = `/projects/${p.slug}/`;
+        a.href = `./${p.slug}/`;
 
         const thumb = document.createElement("div");
         thumb.className = "thumb";
@@ -139,7 +139,7 @@
     }
 
     async function loadProjectsYml() {
-      const res = await fetch("/projects/projects.yml", { cache: "no-store" });
+      const res = await fetch("./projects.yml", { cache: "no-store" });
       if (!res.ok) throw new Error(`Failed to load projects.yml (${res.status})`);
       const text = await res.text();
       const data = jsyaml.load(text);
