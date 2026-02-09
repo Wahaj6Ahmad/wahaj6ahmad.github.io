@@ -2,7 +2,12 @@
 # The order in this list is the order shown on the page.
 
 projects:
-
+  - title: "BSc Thesis: Autonomous Robot With Door Opening Mechanism and Traversal"
+    year: 2020
+    slug: "bachelors-thesis-door-robot"
+    tags: ["mechatronics"]
+    thumbnail: "/assets/img/projects/roarbot/roarbot-main.png"
+    
   - title: "VR/AR System for Remote Factory Support"
     year: 2023
     slug: "vr-ar-remote-factory"
