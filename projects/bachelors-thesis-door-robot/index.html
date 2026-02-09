@@ -1,1 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roarbot — Wahaj</title>
+  <meta name="description" content="Roarbot: a door-opening robot arm built during COVID from scrap parts, using single-camera vision + MATLAB and Arduino-based inverse kinematics control." />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <!-- Page-local CSS for the horizontal video gallery + a simple image grid -->
+  <style>
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 720px) {
+      .media-grid { grid-template-columns: 1fr; }
+    }
+
+    .video-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 2px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .video-card {
+      flex: 0 0 auto;
+      width: 340px;
+      scroll-snap-align: start;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+    .video-card iframe {
+      width: 100%;
+      height: 190px;
+      display: block;
+      border: 0;
+    }
+    .video-card .vc-body {
+      padding: 10px 12px 12px 12px;
+    }
+    .video-card .vc-title {
+      font-weight: 700;
+      margin: 0 0 6px 0;
+      font-size: 0.95rem;
+    }
+    .video-card .vc-meta {
+      margin: 0;
+      opacity: 0.8;
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+
+    img[data-lightbox] { cursor: zoom-in; }
+  </style>
+</head>
+
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="container page-wrap project-page">
+    <a class="muted" href="/projects/">← Back to Projects</a>
+
+    <h1 style="margin: 10px 0 6px 0;">Roarbot</h1>
+    <p class="lead" style="margin: 0;">
+      A door-opening robot arm built during COVID from scrap parts and spare electronics
+    </p>
+
+    <!-- Hero image -->
+    <div class="media-block media-hero">
+      <img
+        src="/assets/img/projects/roarbot/roarbot-main.png"
+        alt="Roarbot main photo"
+        loading="lazy"
+        data-lightbox
+      />
+      <div class="caption">Roarbot: the robot that exists because I refused to let a locked door win.</div>
+    </div>
+
+    <section class="section">
+      <div class="prose">
+        <p>
+          Roarbot was my bachelor’s capstone in Electrical Engineering (Spring 2020), built during COVID when I did not have
+          access to the university lab. That single constraint shaped the whole project: I had to build a working robot arm
+          using <strong>scrap material</strong>, spare parts, and whatever tools I could realistically use at home.
+        </p>
+
+        <p>
+          The goal was to design an autonomous system that can detect a lever-handle door lock and open it using a vision-guided
+          manipulator. But the real thing I’m proud of is the engineering mindset it forced: making decisions based on reality,
+          integrating hardware + software end-to-end, and iterating through messy tests until the system behaves.
+        </p>
+
+        <p style="margin-bottom: 0;">
+          Quick links if you’re skimming:
+        </p>
+        <ul class="bullets" style="margin-top: 8px;">
+          <li><a href="https://youtube.com/shorts/AboHwK1kSiQ" target="_blank" rel="noopener">Reaching for the door knob (short)</a></li>
+          <li><a href="https://youtu.be/1YMbt_eTa1M" target="_blank" rel="noopener">Proof-of-concept prototype (video)</a></li>
+          <li><a href="https://youtube.com/shorts/orAgUqPXTQ0" target="_blank" rel="noopener">Epic fail (short)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>What Roarbot does</h2>
+        <p>
+          Roarbot uses a single mobile camera to locate a door handle, estimates its 3D position, moves a 4+1 DOF manipulator
+          to reach the lever, confirms contact, twists to unlock, and then retracts along a controlled pull to open the door.
+        </p>
+
+        <div class="media-block media-diagram">
+          <img
+            src="/assets/img/projects/roarbot/roarbot-solution-overview.png"
+            alt="Roarbot solution overview flowchart"
+            loading="lazy"
+            data-lightbox
+          />
+          <div class="caption">The loop: vision → 3D location → inverse kinematics → move → contact → twist → pull open.</div>
+        </div>
+
+        <p style="margin-top: 12px;">
+          Doors are where robotics stops being “nice in theory”. They fight back, they misalign, and they force you to make
+          the whole perception-to-action chain reliable.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>Built from scrap (the part I want you to notice)</h2>
+        <p>
+          Because I couldn’t access the lab during COVID, I built Roarbot’s hardware using scrap material and spare parts.
+          I didn’t treat this as a limitation. I treated it as the design brief.
+        </p>
+
+        <p>
+          The best example is the actuator choice: I repurposed <strong>car air-fresher motors</strong>. They were accessible,
+          surprisingly strong, and had a worm-gear assembly that helped hold position under load.
+          Even better: the motor driver was already installed on the board, which made integration simpler and faster.
+        </p>
+      </div>
+
+      <div class="media-grid">
+        <div class="media-block">
+          <img
+            src="/assets/img/projects/roarbot/spare-motor.jpg"
+            alt="Inside of an air fresher motor from scrap, showing worm gear assembly"
+            loading="lazy"
+            data-lightbox
+          />
+          <div class="caption">Scrap air-fresher motor: worm gear assembly = high torque and hard to back-drive.</div>
+        </div>
+
+        <div class="media-block">
+          <img
+            src="/assets/img/projects/roarbot/potentiometer-encoder.jpg"
+            alt="Potentiometer attached to air fresher motor to make an encoder"
+            loading="lazy"
+            data-lightbox
+          />
+          <div class="caption">DIY feedback: a potentiometer coupled to the shaft to act like an “encoder” when real encoders weren’t available.</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p style="margin-top: 12px;">
+          This is the kind of build that teaches you what “engineering” really is: not picking perfect components, but
+          understanding what you have, extracting stable behavior out of it, and designing around the constraints.
+        </p>
+
+        <div class="media-block">
+          <img
+            src="/assets/img/projects/roarbot/bottom-motor.jpg"
+            alt="Bottom motor attachment with Roarbot base"
+            loading="lazy"
+            data-lightbox
+          />
+          <div class="caption">Base mechanics and motor mounting: built to survive repeated testing, not to look pretty.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>Proof of concept (small robot, big signal)</h2>
+        <p>
+          Before committing to the full build, I demonstrated the concept with a smaller prototype.
+          It was my “prove the loop first” step: detect, reach, contact, and pull. Once that worked, scaling up felt like
+          engineering instead of guessing.
+          <a href="https://youtu.be/1YMbt_eTa1M" target="_blank" rel="noopener">Proof-of-concept video</a>.
+        </p>
+      </div>
+
+      <div class="media-block">
+        <img
+          src="/assets/img/projects/roarbot/roarbot-final_pos.png"
+          alt="Final position of Roarbot when reaching for the door knob"
+          loading="lazy"
+          data-lightbox
+        />
+        <div class="caption">Final reach posture: where perception, mechanics, and control all have to agree.</div>
+      </div>
+
+      <div class="prose">
+        <p style="margin-top: 12px;">
+          Roarbot also has a bunch of test clips below, including failures. I keep them because they show the real work:
+          feedback loops, resets, and the moments where the robot teaches you what you forgot to design for.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>Technical overview</h2>
+        <p>
+          This is the full breakdown. It’s long, but it’s the part that sells me as a builder: a working system with
+          hardware implementation and software implementation that actually talk to each other.
+        </p>
+      </div>
+
+      <details data-collapsible>
+        <summary>
+          <span>Technical details (hardware + software)</span>
+          <svg class="details-chev" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+
+        <div class="details-inner">
+          <div class="prose">
+            <h3 style="margin: 0 0 10px 0;">Hardware implementation</h3>
+            <ul class="bullets">
+              <li><strong>Scrap actuation:</strong> air-fresher DC motors with worm gears + integrated driver boards.</li>
+              <li><strong>Feedback:</strong> potentiometer-based position sensing attached to joints.</li>
+              <li><strong>Structure:</strong> mixed material build (whatever could be sourced reliably during lockdown).</li>
+              <li><strong>Contact confirmation:</strong> simple sensor/switch logic to detect when the handle is engaged.</li>
+              <li><strong>Controller:</strong> Arduino-based control for joint actuation and feedback handling.</li>
+            </ul>
+          </div>
+
+          <div class="media-grid">
+            <div class="media-block">
+              <img
+                src="/assets/img/projects/roarbot/roarbot-hardware-block-diagram.png"
+                alt="Hardware block diagram of Roarbot"
+                loading="lazy"
+                data-lightbox
+              />
+              <div class="caption">Hardware block diagram: how power, actuation, and sensing are wired into the control loop.</div>
+            </div>
+
+            <div class="media-block">
+              <img
+                src="/assets/img/projects/roarbot/roarbot-electrical-setup.png"
+                alt="Electrical setup for Roarbot"
+                loading="lazy"
+                data-lightbox
+              />
+              <div class="caption">Electrical setup: the part that always looks simple until you have to debug it.</div>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="prose">
+            <h3 style="margin: 0 0 10px 0;">Software implementation (perception → 3D → control)</h3>
+
+            <div class="minihead">1) Vision (single camera)</div>
+            <p>
+              A mobile camera provides the input stream. The frame is processed to isolate the handle region, then the
+              handle position is extracted (centroid / region properties). The key is consistency: once the vision output is stable,
+              the control side becomes predictable.
+            </p>
+
+            <div class="media-block">
+              <img
+                src="/assets/img/projects/roarbot/roarbot-single-frame-cv.png"
+                alt="Door frame and image processing shown in steps"
+                loading="lazy"
+                data-lightbox
+              />
+              <div class="caption">One frame, multiple steps: raw image → mask → cleanup → handle localization.</div>
+            </div>
+
+            <div class="media-block">
+              <img
+                src="/assets/img/projects/roarbot/roarbot-input-output-images.png"
+                alt="Input image and output image side by side"
+                loading="lazy"
+                data-lightbox
+              />
+              <div class="caption">Input vs output: turning pixels into a target the robot can move toward.</div>
+            </div>
+
+            <div class="minihead">2) 3D estimation + arm frame alignment</div>
+            <p>
+              The 2D handle location is converted into a usable 3D target (with calibration and coordinate alignment),
+              then translated into the arm’s working coordinates.
+            </p>
+
+            <div class="minihead">3) Inverse kinematics + motion control</div>
+            <p>
+              An IK solution computes joint targets for reaching. The Arduino drives actuation while monitoring joint feedback,
+              enforcing bounds, and keeping motion stable under load.
+            </p>
+
+            <div class="minihead">4) Door opening routine</div>
+            <p>
+              The end effector approaches, confirms contact, twists the lever to unlock, then performs a controlled pull to open the door.
+              This is where robustness matters: the sequence has to tolerate small misalignments without instantly failing.
+            </p>
+
+            <h3 style="margin: 14px 0 10px 0;">Tech used</h3>
+            <ul class="bullets">
+              <li>Arduino (control + feedback)</li>
+              <li>MATLAB (vision pipeline)</li>
+              <li>Single mobile camera stream (phone as camera)</li>
+              <li>Potentiometer-based joint feedback</li>
+              <li>Repurposed DC motors with worm gears + integrated drivers</li>
+            </ul>
+          </div>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>Why this matters for my robotics path</h2>
+        <p>
+          Roarbot is the project I use to prove I can build robots outside ideal conditions. No lab, no perfect parts,
+          and still a system that integrates perception, mechanics, control, and feedback.
+        </p>
+
+        <ul class="bullets">
+          <li><strong>Scrap-to-system engineering:</strong> I can build with constraints and still deliver working behavior.</li>
+          <li><strong>Full-loop integration:</strong> vision is only useful if it drives real motion. Roarbot does that.</li>
+          <li><strong>Debugging mindset:</strong> the failures are documented because they are part of the engineering story.</li>
+        </ul>
+
+        <p style="margin-top: 12px;">
+          Build + test clips are linked above, and embedded below as a scrollable gallery.
+        </p>
+      </div>
+
+      <div class="media-block">
+        <img
+          src="/assets/img/projects/roarbot/waiting.jpeg"
+          alt="Roarbot waiting for instructions"
+          loading="lazy"
+          data-lightbox
+        />
+        <div class="caption">He’s just standing there… waiting for the next command and the next bug.</div>
+      </div>
+    </section>
+
+    <!-- Bottom video gallery (horizontal scroll) -->
+    <section class="section">
+      <div class="prose">
+        <h2>Video gallery</h2>
+        <p style="margin-bottom: 8px;">
+          Scroll sideways. This is the build log + tests + chaos section.
+        </p>
+      </div>
+
+      <div class="video-strip" aria-label="Roarbot videos gallery">
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/1YMbt_eTa1M"
+            title="Roarbot proof of concept prototype"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Proof of concept (prototype)</p>
+            <p class="vc-meta">The “prove the loop first” phase.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/WSrt65NzV4U"
+            title="Roarbot reset test"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Reset test</p>
+            <p class="vc-meta">Return-to-home, because drift is real.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/iF9ZSxYKuec"
+            title="Roarbot feedback issues"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Feedback issues</p>
+            <p class="vc-meta">Sensors will humble you.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/orAgUqPXTQ0"
+            title="Roarbot epic fail"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Epic fail</p>
+            <p class="vc-meta">Kept on purpose. Real robotics.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/AboHwK1kSiQ"
+            title="Roarbot reaching for the door knob"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Reaching for the knob</p>
+            <p class="vc-meta">The money moment.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/vHDZGaYBRgU"
+            title="Roarbot build progress 2 DOF"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Build progress (2 DOF)</p>
+            <p class="vc-meta">Early form, early lessons.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/QJiHD6i1W1E"
+            title="Roarbot build progress 3 DOF"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Build progress (3 DOF)</p>
+            <p class="vc-meta">More joints, more debugging.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/f5101vUjPCU"
+            title="Roarbot build progress 5 DOF"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Build progress (5 DOF)</p>
+            <p class="vc-meta">Final build arc.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- LIGHTBOX OVERLAY -->
+  <div id="lightbox" class="lb-overlay" aria-hidden="true">
+    <div class="lb-content" role="dialog" aria-label="Image viewer">
+      <button class="lb-close" type="button" aria-label="Close image" id="lbClose">×</button>
+      <img class="lb-img" id="lbImg" alt="" />
+    </div>
+  </div>
+
+  <div id="siteFooter"></div>
+  <script src="/assets/js/layout.js" defer></script>
+
+  <script>
+    // Robust init so the lightbox doesn't silently break if #year isn't available yet.
+    (function () {
+      function trySetYear() {
+        const yearEl = document.getElementById("year");
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+      }
+      trySetYear();
+      window.addEventListener("load", trySetYear);
+
+      // "See less" buttons: collapse the parent <details> (event delegation)
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-see-less]");
+        if (!btn) return;
+        const details = btn.closest("details");
+        if (details) details.removeAttribute("open");
+        const summary = details ? details.querySelector("summary") : null;
+        if (summary) summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+
+      // Lightbox (event delegation so it works even inside <details>)
+      const lb = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      const lbClose = document.getElementById("lbClose");
+
+      if (!lb || !lbImg || !lbClose) return;
+
+      function openLightbox(src, alt) {
+        lbImg.src = src;
+        lbImg.alt = alt || "";
+        lb.classList.add("open");
+        lb.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lb.classList.remove("open");
+        lb.setAttribute("aria-hidden", "true");
+        lbImg.src = "";
+        lbImg.alt = "";
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("click", (e) => {
+        const img = e.target.closest("img[data-lightbox]");
+        if (img) openLightbox(img.currentSrc || img.src, img.alt);
+      });
+
+      lbClose.addEventListener("click", closeLightbox);
+
+      lb.addEventListener("click", (e) => {
+        if (e.target === lb) closeLightbox();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lb.classList.contains("open")) closeLightbox();
+      });
+    })();
+  </script>
+</body>
+</html>
 
