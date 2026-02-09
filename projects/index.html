@@ -30,7 +30,9 @@
 
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const y = document.getElementById("year");
+    if (y) y.textContent = new Date().getFullYear();
+
 
     const FILTER_ALL = "all";
     let allProjects = [];
