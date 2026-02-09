@@ -1,29 +1,289 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SquidMind — Wahaj</title>
+  <meta name="description" content="SquidMind: an octopus-shaped HRI prototype for a turn-taking color memorization game, combining non-verbal cues with voice." />
   <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
 <body>
   <div id="siteHeader"></div>
 
+  <main class="container page-wrap project-page">
+    <a class="muted" href="/projects/">← Back to Projects</a>
 
-  <main class="container" style="padding: 42px 0;">
-    <p class="muted"><a href="/projects/">← Back to Projects</a></p>
-    <h1>SquidMind</h1>
-    <p class="muted">Coming soon. This page will be the dedicated case study.</p>
+    <h1 style="margin: 10px 0 6px 0;">SquidMind</h1>
+    <p class="lead" style="margin: 0;">
+      A tentacled memory game robot that teaches turn-taking through lights, motion, and voice
+    </p>
+
+    <!-- Main photo -->
+    <div class="media-block media-hero">
+      <img
+        src="/assets/img/projects/squidmind/sm_main.jpg"
+        alt="SquidMind robot main photo"
+        loading="lazy"
+        data-lightbox
+      />
+      <div class="caption">SquidMind, ready to judge your memory skills.</div>
+    </div>
+
+    <section class="section">
+      <div class="prose">
+        <p>
+          I built SquidMind in the Human-Robot Communication course at the University of Twente (Challenges 2 and 3, Oct 2022).
+          Challenge 2 pushed us into pure <strong>non-verbal interaction</strong>. So we designed a simple color-pattern memory game
+          where the robot communicates through LED expressions and physical input through its “tentacles”.
+        </p>
+
+        <p>
+          In the final iteration (Challenge 3), we were allowed to add semantic communication. That let us upgrade the same robot
+          into something more social: a game built around <strong>clear turn-taking</strong> and guidance, so the interaction doesn’t
+          rely on guesswork.
+        </p>
+
+        <h2 style="margin: 18px 0 10px 0;">Demo</h2>
+      </div>
+
+      <div class="video" aria-label="Demo video embed">
+        <iframe
+          src="https://www.youtube.com/embed/N02eqHRsldk"
+          title="SquidMind demo video."
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div class="prose">
+        <p style="margin-top: 12px;">
+          If you’ve seen my Roboception project, then you can see my overthinking of the blinking animations has come to fruition here.
+          SquidMind has opinions, and it expresses them with LEDs.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>What the robot does</h2>
+        <p>
+          SquidMind runs a color-pattern memory game with a “my turn / your turn” rhythm. The robot shows a sequence of colors,
+          waits for the user to reproduce it through the tentacles, then responds with immediate feedback. In the final version,
+          voice is used to make the structure and expectations explicit, so the user doesn’t have to infer the rules from lights alone.
+        </p>
+      </div>
+
+      <details data-collapsible>
+        <summary>
+          <span>Technical details</span>
+          <svg class="details-chev" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+
+        <div class="details-inner">
+          <div class="prose">
+            <h3 style="margin: 0 0 10px 0;">Interaction logic</h3>
+            <p style="margin-top: 12px;">
+              The core loop is intentionally simple: show a pattern → wait for input → confirm correctness → increase difficulty.
+              The biggest design shift from Challenge 2 to Challenge 3 was clarity: we kept the same game, but used voice to support turn-taking
+              and reduce ambiguity in “what do I do now?”
+            </p>
+          </div>
+
+          <!-- Gameplay / expression images -->
+          <div class="media-block media-diagram">
+            <img
+              src="/assets/img/projects/squidmind/sm-gameplay.png"
+              alt="SquidMind face while displaying colors during gameplay"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">Gameplay state: SquidMind displaying the color sequence.</div>
+          </div>
+
+          <div class="media-row">
+            <img
+              src="/assets/img/projects/squidmind/sm-correct.png"
+              alt="SquidMind reaction when the user inputs the correct color pattern"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="media-caption">
+              Correct input reaction: this is SquidMind being proud of you.
+            </div>
+          </div>
+
+          <div class="media-row">
+            <img
+              src="/assets/img/projects/squidmind/sm-wrong.jpg"
+              alt="SquidMind reaction when the user inputs the wrong color pattern"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="media-caption">
+              Wrong input reaction: disappointment, but make it educational.
+            </div>
+          </div>
+
+          <div class="prose">
+            <h3 style="margin: 14px 0 10px 0;">Tech used</h3>
+            <ul class="bullets">
+              <li>Embedded prototyping: tentacle inputs (sensors/buttons) + LED feedback</li>
+              <li>LED “face” expressions for state + feedback (gameplay, correct, wrong)</li>
+              <li>Servo-based movement used as an extra layer of communication (non-verbal cues)</li>
+              <li>Turn-taking interaction design, upgraded with voice in the final iteration</li>
+              <li>Rapid physical prototyping (cardboard body + iterative rebuilds)</li>
+            </ul>
+          </div>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
+        </div>
+      </details>
+
+      <details data-collapsible>
+        <summary>
+          <span>Evaluations + learnings</span>
+          <svg class="details-chev" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+
+        <div class="details-inner">
+          <div class="prose">
+            <h3 style="margin: 0 0 10px 0;">Evaluation</h3>
+            <p>
+              We tested SquidMind with participants to see whether the cues were understandable, whether turn-taking felt clear,
+              and where people got stuck (or formed the wrong mental model).
+            </p>
+          </div>
+
+          <div class="media-row">
+            <img
+              src="/assets/img/projects/squidmind/sm-eval.png"
+              alt="A participant evaluating SquidMind"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="media-caption">
+              Evaluation moment: this is where the real bugs show up.
+            </div>
+          </div>
+
+          <div class="prose">
+            <div class="minihead">What worked well</div>
+            <ul class="bullets">
+              <li>LED expressions made the robot’s state readable during gameplay.</li>
+              <li>The correct/wrong feedback was immediate and easy to interpret.</li>
+              <li>Voice (final iteration) helped remove ambiguity in “what’s expected from me right now?”</li>
+            </ul>
+
+            <div class="minihead">What I’d improve next</div>
+            <ul class="bullets">
+              <li>Make the “start / activation” affordance impossible to miss (people will default to button-hunting).</li>
+              <li>Tighten the tutorial: teach by doing, then keep explanations short during play.</li>
+              <li>Harden the system for real-world use: handle interruptions, retries, and the weird stuff humans do mid-game.</li>
+            </ul>
+          </div>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>Why this matters for my robotics path</h2>
+        <p>
+          SquidMind is the kind of project that sits right in the middle of what I want to do as a roboticist:
+          building systems where <strong>hardware, behavior, and human interpretation</strong> all have to line up.
+          The LEDs and tentacles were the easy part. The hard part was designing cues that people understand consistently,
+          then validating that with real users and iterating from what broke.
+        </p>
+
+        <ul class="bullets">
+          <li><strong>HRI thinking:</strong> designing interaction logic around turn-taking and expectations</li>
+          <li><strong>Embodied feedback:</strong> using light + motion as communication channels, not decoration</li>
+          <li><strong>Iteration through testing:</strong> finding the points where users form the wrong mental model, then fixing those</li>
+        </ul>
+      </div>
+
+      <div class="media-block">
+        <img
+          src="/assets/img/projects/squidmind/sm-gameplay.png"
+          alt="Close-up of SquidMind during gameplay"
+          loading="lazy"
+          data-lightbox
+        />
+        <div class="caption">This is the face SquidMind makes when it’s about to test you.</div>
+      </div>
+    </section>
   </main>
+
+  <!-- LIGHTBOX OVERLAY -->
+  <div id="lightbox" class="lb-overlay" aria-hidden="true">
+    <div class="lb-content" role="dialog" aria-label="Image viewer">
+      <button class="lb-close" type="button" aria-label="Close image" id="lbClose">×</button>
+      <img class="lb-img" id="lbImg" alt="" />
+    </div>
+  </div>
 
   <div id="siteFooter"></div>
   <script src="/assets/js/layout.js" defer></script>
 
-
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // "See less" buttons: collapse the parent <details>
+    document.querySelectorAll("[data-see-less]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const details = e.target.closest("details");
+        if (details) details.removeAttribute("open");
+        const summary = details ? details.querySelector("summary") : null;
+        if (summary) summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    });
+
+    // Lightbox
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbClose = document.getElementById("lbClose");
+
+    function openLightbox(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || "";
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+      lbImg.src = "";
+      lbImg.alt = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("img[data-lightbox]").forEach((img) => {
+      img.addEventListener("click", () => openLightbox(img.src, img.alt));
+    });
+
+    lbClose.addEventListener("click", closeLightbox);
+
+    lb.addEventListener("click", (e) => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lb.classList.contains("open")) closeLightbox();
+    });
   </script>
 </body>
 </html>
