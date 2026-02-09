@@ -1,41 +1,402 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MSc Thesis — Wahaj</title>
+  <title>VR/AR Remote Factory Support — Wahaj</title>
+  <meta name="description" content="VR/AR system for remote factory support: VR annotation on a 3D scanned product + AR overlay on the real product for on-site workers." />
   <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">Wahaj</a>
-    <nav class="nav">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="/resume/">Resume</a>
-      <a class="nav-link" href="/work-experience/">Work Experience</a>
-      <a class="nav-link is-active" href="/projects/">Projects</a>
-      <a class="nav-link" href="/about/">About</a>
-      <a class="nav-link" href="/contact/">Contact</a>
-    </nav>
-  </header>
+  <div id="siteHeader"></div>
 
-  <main class="container" style="padding: 42px 0;">
-    <p class="muted"><a href="/projects/">← Back to Projects</a></p>
-    <h1>MSc Thesis</h1>
-    <p class="muted">Coming soon. This page will be the dedicated case study.</p>
+  <main class="container page-wrap project-page">
+    <a class="muted" href="/projects/">← Back to Projects</a>
+
+    <h1 style="margin: 10px 0 6px 0;">VR/AR Remote Factory Support</h1>
+    <p class="lead" style="margin: 0;">
+      A mixed reality pipeline for FrieslandCampina: annotate defects in VR, see guidance on the real product in AR
+    </p>
+
+    <!-- Main photo / hero -->
+    <div class="media-block media-hero">
+      <img
+        src="/assets/img/projects/vr/vr-structure.png"
+        alt="Overall structure of the VR/AR feedback system"
+        loading="lazy"
+        data-lightbox
+      />
+      <div class="caption">The big idea: VR for precise annotation, AR for in-context feedback on the real object.</div>
+    </div>
+
+    <section class="section">
+      <div class="prose">
+        <p>
+          This project was built for <strong>FrieslandCampina</strong>. The problem was very practical:
+          packaging developers (based in the Netherlands) cannot always be physically present during trial sessions at the factory site in Indonesia,
+          and regular video calls make it hard to point out defects precisely on a real product. :contentReference[oaicite:0]{index=0}
+        </p>
+
+        <p>
+          So we designed a mixed reality workflow:
+          a quality manager inspects a <strong>highly accurate 3D scanned model</strong> in VR, draws directly on it,
+          and the on-site team sees those annotations <strong>overlaid on the real product</strong> through an AR camera or AR glasses. :contentReference[oaicite:1]{index=1}
+        </p>
+
+        <!-- Client logo -->
+        <div class="media-row" style="margin-top: 10px;">
+          <img
+            src="/assets/img/projects/vr/vr-client-logo.png"
+            alt="FrieslandCampina logo"
+            loading="lazy"
+            data-lightbox
+          />
+          <div class="media-caption">
+            Client: FrieslandCampina.
+          </div>
+        </div>
+
+        <h2 style="margin: 18px 0 10px 0;">Demo</h2>
+      </div>
+
+      <!-- Main demo -->
+      <div class="video" aria-label="Demo video embed">
+        <iframe
+          src="https://www.youtube.com/embed/pDtpxU9iAx8"
+          title="VR/AR Remote Factory Support demo video."
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div class="prose">
+        <h3 style="margin: 14px 0 10px 0;">Prototyping the VR annotation experience</h3>
+      </div>
+
+      <!-- Prototyping video -->
+      <div class="video" aria-label="VR annotation prototyping video embed">
+        <iframe
+          src="https://www.youtube.com/embed/wkseW5oNW3I"
+          title="VR annotation prototyping video."
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div class="prose">
+        <p style="margin-top: 12px;">
+          This project is where my UI/UX “overthinking” became useful. I had to design an annotation tool that feels obvious in VR:
+          simple, minimal, and fast to use, without turning the user’s left hand into a menu jungle. :contentReference[oaicite:2]{index=2}
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>What the system does</h2>
+        <p>
+          The core workflow is a two-part loop:
+        </p>
+        <ul class="bullets">
+          <li>
+            <strong>VR side (Netherlands):</strong> inspect a 3D model of the product in a factory-like VR environment,
+            then draw annotations directly on the model for precise defect communication. :contentReference[oaicite:3]{index=3}
+          </li>
+          <li>
+            <strong>AR side (Indonesia):</strong> track the real product using markers and overlay the latest VR annotations
+            onto the corresponding physical surface in the camera view. :contentReference[oaicite:4]{index=4}
+          </li>
+        </ul>
+      </div>
+
+      <details data-collapsible>
+        <summary>
+          <span>Technical details</span>
+          <svg class="details-chev" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+
+        <div class="details-inner">
+          <div class="prose">
+            <h3 style="margin: 0 0 10px 0;">Architecture (VR → server → AR)</h3>
+            <p style="margin-top: 12px;">
+              The system connects a VR annotation app (Unity) with an AR feedback app (Python/OpenCV) through a server,
+              so the latest annotations can be transmitted and shown in-context on the real object. :contentReference[oaicite:5]{index=5}
+            </p>
+          </div>
+
+          <div class="media-block media-diagram">
+            <img
+              src="/assets/img/projects/vr/vr-annotation-feedback-system.png"
+              alt="Full process of the annotation feedback system"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">Full process of the annotation feedback system.</div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="prose">
+            <h3 style="margin: 0 0 10px 0;">VR implementation</h3>
+            <p style="margin-top: 12px;">
+              The VR prototype was built in <strong>Unity (C#)</strong> using <strong>OpenXR</strong> for integration with the Oculus Quest Pro.
+              A key design decision was placing the drawing palette on the user’s <strong>left hand</strong>,
+              so color and stroke width changes stay within reach while the user keeps focus on the product. :contentReference[oaicite:6]{index=6}
+            </p>
+          </div>
+
+          <div class="media-block media-diagram">
+            <img
+              src="/assets/img/projects/vr/vr-annotation-palatte.png"
+              alt="VR annotation palette UI"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">VR annotation palette (color + stroke width).</div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="prose">
+            <h3 style="margin: 0 0 10px 0;">AR implementation</h3>
+            <p style="margin-top: 12px;">
+              The AR side was implemented in <strong>Python</strong> using <strong>OpenCV</strong>.
+              For tracking we used <strong>ArUco markers</strong> (6x6_250 dictionary) placed on the product’s surfaces.
+              The program detects the marker ID, estimates camera pose, identifies which face is visible, then transforms the matching
+              annotation image so it “fits” onto that plane in the camera view. :contentReference[oaicite:7]{index=7}
+            </p>
+
+            <p>
+              For the demo, we generated annotation renders from multiple sides of the product every second,
+              transmitted them, and mapped them back to the correct surface in AR. :contentReference[oaicite:8]{index=8}
+            </p>
+
+            <p>
+              We also treated security as part of “technical quality”: communication is secured via SSL/TLS,
+              and generated content is stored temporarily and deleted when the session ends. :contentReference[oaicite:9]{index=9}
+            </p>
+          </div>
+
+          <div class="media-block media-diagram">
+            <img
+              src="/assets/img/projects/vr/vr-structure.png"
+              alt="Overall structure of the AR feedback system"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">Overall AR feedback structure.</div>
+          </div>
+
+          <div class="prose">
+            <h3 style="margin: 14px 0 10px 0;">Tech used</h3>
+            <ul class="bullets">
+              <li>Unity + C# (VR application)</li>
+              <li>OpenXR (Quest Pro integration)</li>
+              <li>Python + OpenCV (AR overlay + tracking)</li>
+              <li>ArUco marker tracking (6x6_250 dictionary)</li>
+              <li>Server bridge to transmit annotations between VR and AR</li>
+              <li>SSL/TLS encryption + session-based deletion of generated data</li>
+            </ul>
+          </div>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
+        </div>
+      </details>
+
+      <details data-collapsible>
+        <summary>
+          <span>UI/UX decisions</span>
+          <svg class="details-chev" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+
+        <div class="details-inner">
+          <div class="prose">
+            <p>
+              In VR, UI mistakes are expensive. If the tool is confusing, the user can’t “power through” like they can on a laptop.
+              So the annotation menu was designed to stay <strong>minimal</strong> (few buttons, no long text),
+              and still support the features that matter in real work: undo/redo and erasing without hunting for it. :contentReference[oaicite:10]{index=10}
+            </p>
+
+            <p>
+              We used classic usability heuristics as guardrails (aesthetic/minimalist design, visibility of system status, user control and freedom).
+              Concretely: the pointer changes width and color based on the selected brush, hover states give feedback,
+              and selection is shown clearly so the user never wonders “what am I drawing with right now?” :contentReference[oaicite:11]{index=11}
+            </p>
+          </div>
+
+          <div class="media-block media-diagram">
+            <img
+              src="/assets/img/projects/vr/vr-color-palatte.png"
+              alt="Chosen color palette"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">Base UI color palette (checked for contrast accessibility).</div>
+          </div>
+
+          <div class="prose">
+            <p style="margin-top: 12px;">
+              Accessibility wasn’t an afterthought. We checked the palette against WCAG contrast guidance,
+              and kept the interface readable for users with visual impairments. :contentReference[oaicite:12]{index=12}
+            </p>
+
+            <p>
+              For annotation colors, we avoided a full color wheel. Instead we used a limited set of options (enough to be expressive,
+              not enough to be overwhelming). Six of the annotation colors were inspired by the FrieslandCampina logo
+              so the tool feels consistent with the client’s world. :contentReference[oaicite:13]{index=13}
+            </p>
+          </div>
+
+          <div class="media-block media-diagram">
+            <img
+              src="/assets/img/projects/vr/vr-annotation-palatte.png"
+              alt="Annotation menu color options"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">Annotation palette color options (simple on purpose).</div>
+          </div>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
+        </div>
+      </details>
+
+      <details data-collapsible>
+        <summary>
+          <span>Evaluations + learnings</span>
+          <svg class="details-chev" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+
+        <div class="details-inner">
+          <div class="prose">
+            <h3 style="margin: 0 0 10px 0;">Test plan highlights</h3>
+            <ul class="bullets">
+              <li><strong>Functionality:</strong> prove the full loop works (annotate in VR → see feedback in AR). :contentReference[oaicite:14]{index=14}</li>
+              <li><strong>Performance constraints:</strong> we limited the demo target to a rectangular prism package shape. :contentReference[oaicite:15]{index=15}</li>
+              <li><strong>Usability:</strong> two rounds of testing; we tuned overlay opacity and iterated QR/marker sizes to improve realism. :contentReference[oaicite:16]{index=16}</li>
+            </ul>
+
+            <p>
+              A big lesson for me: “it works” is not the same as “it lines up convincingly on a real object.”
+              Most of our practical iteration was about alignment, scaling realism, and making the AR overlay feel glued to the product. :contentReference[oaicite:17]{index=17}
+            </p>
+          </div>
+
+          <div class="media-block">
+            <img
+              src="/assets/img/projects/vr/vr-annotation-feedback-system.png"
+              alt="Full process pipeline figure"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">When a system has this many steps, testing stops being optional.</div>
+          </div>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="section">
+      <div class="prose">
+        <h2>Why this matters for my robotics path</h2>
+        <p>
+          This project is exactly the kind of robotics work I want more of: a real client problem, a multi-part system,
+          and the messy middle where tracking, networking, UI decisions, and human understanding all collide.
+        </p>
+
+        <ul class="bullets">
+          <li><strong>Systems thinking:</strong> VR + AR + server + tracking + security, all as one pipeline. :contentReference[oaicite:18]{index=18}</li>
+          <li><strong>HRI + UI/UX in 3D:</strong> designing tools that feel obvious in VR, not just “feature complete.” :contentReference[oaicite:19]{index=19}</li>
+          <li><strong>Computer vision practice:</strong> ArUco-based pose estimation and plane-aligned overlay. :contentReference[oaicite:20]{index=20}</li>
+        </ul>
+      </div>
+
+      <div class="media-block">
+        <img
+          src="/assets/img/projects/vr/vr-color-palatte.png"
+          alt="Color palette used in the interface"
+          loading="lazy"
+          data-lightbox
+        />
+        <div class="caption">The quiet part of “industrial tools”: if the contrast is wrong, the tool is wrong.</div>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-row">
-      <span>© <span id="year"></span> Wahaj</span>
-      <span class="muted">Built with GitHub Pages</span>
+  <!-- LIGHTBOX OVERLAY -->
+  <div id="lightbox" class="lb-overlay" aria-hidden="true">
+    <div class="lb-content" role="dialog" aria-label="Image viewer">
+      <button class="lb-close" type="button" aria-label="Close image" id="lbClose">×</button>
+      <img class="lb-img" id="lbImg" alt="" />
     </div>
-  </footer>
+  </div>
+
+  <div id="siteFooter"></div>
+  <script src="/assets/js/layout.js" defer></script>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // "See less" buttons: collapse the parent <details>
+    document.querySelectorAll("[data-see-less]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const details = e.target.closest("details");
+        if (details) details.removeAttribute("open");
+        const summary = details ? details.querySelector("summary") : null;
+        if (summary) summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    });
+
+    // Lightbox
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbClose = document.getElementById("lbClose");
+
+    function openLightbox(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || "";
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+      lbImg.src = "";
+      lbImg.alt = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("img[data-lightbox]").forEach((img) => {
+      img.addEventListener("click", () => openLightbox(img.src, img.alt));
+    });
+
+    lbClose.addEventListener("click", closeLightbox);
+
+    lb.addEventListener("click", (e) => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lb.classList.contains("open")) closeLightbox();
+    });
   </script>
 </body>
 </html>
