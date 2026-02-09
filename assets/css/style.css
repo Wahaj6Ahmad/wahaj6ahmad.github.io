@@ -596,3 +596,19 @@ details[open] > summary .details-chev {
     background: rgba(255,255,255,0.04);
   }
 }
+
+/* Underline hyperlinks in project pages */
+.project-page .prose a,
+.project-page .bullets a,
+.project-page .media-caption a,
+.project-page .caption a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.project-page .prose a:hover,
+.project-page .bullets a:hover {
+  text-decoration-thickness: 2px;
+}
+
