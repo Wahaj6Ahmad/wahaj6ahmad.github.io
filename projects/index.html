@@ -1,177 +1,143 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects — Wahaj</title>
-  <meta name="description" content="Projects by Wahaj." />
-  <link rel="stylesheet" href="/assets/css/style.css" />
+<script>
+  const FILTER_ALL = "all";
+  let allProjects = [];
+  let activeFilter = FILTER_ALL;
 
-  <!-- YAML parser (client-side). Works fine on GitHub Pages. -->
-  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-</head>
+  // Works on user pages, repo pages, and custom domains
+  const BASE = location.pathname.split("/projects/")[0] || "";
 
-<body>
-  <div id="siteHeader"></div>
+  function resolvePath(u) {
+    if (!u) return "";
+    if (/^https?:\/\//i.test(u)) return u;
+    if (u.startsWith("/")) return BASE + u;  // "/assets/.." -> "/repo/assets/.."
+    return BASE + "/" + u;
+  }
 
+  function normalizeTag(tag) {
+    return String(tag || "").trim().toLowerCase();
+  }
 
-  <main class="container page-wrap projects-page">
-    <h1 class="page-title">Click project photos below to learn more!</h1>
+  function titleCase(tag) {
+    const t = normalizeTag(tag);
+    if (!t) return "";
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
 
-    <div id="filters" class="filters" aria-label="Project filters"></div>
+  function projectMatchesFilter(p, filter) {
+    if (filter === FILTER_ALL) return true;
+    const tags = (p.tags || []).map(normalizeTag);
+    return tags.includes(normalizeTag(filter));
+  }
 
-    <section id="grid" class="grid" aria-label="Project grid"></section>
+  function renderFilters(projects) {
+    const filtersEl = document.getElementById("filters");
+    filtersEl.innerHTML = "";
 
-    <p id="empty" class="empty">No projects match this filter.</p>
-  </main>
+    const seen = new Set();
+    const tagsInOrder = [];
 
-  <div id="siteFooter"></div>
-  <script src="/assets/js/layout.js" defer></script>
-
-
-  <script>
-    const y = document.getElementById("year");
-    if (y) y.textContent = new Date().getFullYear();
-
-
-    const FILTER_ALL = "all";
-    let allProjects = [];
-    let activeFilter = FILTER_ALL;
-
-    function normalizeTag(tag) {
-      return String(tag || "").trim().toLowerCase();
-    }
-
-    function titleCase(tag) {
-      const t = normalizeTag(tag);
-      if (!t) return "";
-      return t.charAt(0).toUpperCase() + t.slice(1);
-    }
-
-    function projectMatchesFilter(p, filter) {
-      if (filter === FILTER_ALL) return true;
-      const tags = (p.tags || []).map(normalizeTag);
-      return tags.includes(normalizeTag(filter));
-    }
-
-    function renderFilters(projects) {
-      const filtersEl = document.getElementById("filters");
-      filtersEl.innerHTML = "";
-
-      const seen = new Set();
-      const tagsInOrder = [];
-      for (const p of projects) {
-        for (const tag of (p.tags || [])) {
-          const key = normalizeTag(tag);
-          if (key && !seen.has(key)) {
-            seen.add(key);
-            tagsInOrder.push(key);
-          }
+    for (const p of projects) {
+      for (const tag of (p.tags || [])) {
+        const key = normalizeTag(tag);
+        if (key && !seen.has(key)) {
+          seen.add(key);
+          tagsInOrder.push(key);
         }
       }
-
-      const filters = [FILTER_ALL, ...tagsInOrder];
-
-      for (const f of filters) {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "chip" + (f === activeFilter ? " is-active" : "");
-        btn.dataset.filter = f;
-        btn.textContent = (f === FILTER_ALL) ? "All" : titleCase(f);
-        btn.addEventListener("click", () => {
-          activeFilter = f;
-          renderFilters(allProjects);
-          renderGrid(allProjects);
-        });
-        filtersEl.appendChild(btn);
-      }
     }
 
-    function renderGrid(projects) {
-      const gridEl = document.getElementById("grid");
-      const emptyEl = document.getElementById("empty");
+    const filters = [FILTER_ALL, ...tagsInOrder];
 
-      gridEl.innerHTML = "";
+    for (const f of filters) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip" + (f === activeFilter ? " is-active" : "");
+      btn.dataset.filter = f;
+      btn.textContent = (f === FILTER_ALL) ? "All" : titleCase(f);
 
-      const filtered = projects.filter(p => projectMatchesFilter(p, activeFilter));
-
-      if (filtered.length === 0) {
-        emptyEl.style.display = "block";
-        return;
-      } else {
-        emptyEl.style.display = "none";
-      }
-
-      for (const p of filtered) {
-        const a = document.createElement("a");
-        a.className = "tile";
-        a.href = `./${p.slug}/`;
-
-        const thumb = document.createElement("div");
-        thumb.className = "thumb";
-
-        const img = document.createElement("img");
-        const BASE = location.pathname.split("/projects/")[0] || ""; // "" for user site, "/repo" for repo site
-
-        function resolvePath(u) {
-          if (!u) return "";
-          if (/^https?:\/\//i.test(u)) return u;   // external URLs
-          if (u.startsWith("/")) return BASE + u;  // "/assets/.." -> "/repo/assets/.." on repo pages
-          return BASE + "/" + u;                  // "assets/.."  -> "/repo/assets/.."
-        }
-        
-        img.src = resolvePath(p.thumbnail);
-
-        img.alt = p.title ? `Thumbnail for ${p.title}` : "Project thumbnail";
-        img.loading = "lazy";
-
-        thumb.appendChild(img);
-
-        const meta = document.createElement("div");
-        meta.className = "tile-meta";
-
-        const h3 = document.createElement("h3");
-        h3.className = "tile-title";
-        h3.textContent = p.title || "Untitled Project";
-
-        const year = document.createElement("div");
-        year.className = "tile-year";
-        year.textContent = p.year || "";
-
-        meta.appendChild(h3);
-        meta.appendChild(year);
-
-        a.appendChild(thumb);
-        a.appendChild(meta);
-
-        gridEl.appendChild(a);
-      }
-    }
-
-    async function loadProjectsYml() {
-      const res = await fetch("./projects.yml", { cache: "no-store" });
-      if (!res.ok) throw new Error(`Failed to load projects.yml (${res.status})`);
-      const text = await res.text();
-      const data = jsyaml.load(text);
-
-      if (!data || !Array.isArray(data.projects)) {
-        throw new Error("projects.yml must contain a top-level 'projects:' list.");
-      }
-      return data.projects;
-    }
-
-    (async function init() {
-      try {
-        allProjects = await loadProjectsYml();
+      btn.addEventListener("click", () => {
+        activeFilter = f;
         renderFilters(allProjects);
         renderGrid(allProjects);
-      } catch (err) {
-        console.error(err);
-        const emptyEl = document.getElementById("empty");
-        emptyEl.style.display = "block";
-        emptyEl.textContent = "Could not load projects. Check console for details.";
-      }
-    })();
-  </script>
-</body>
-</html>
+      });
+
+      filtersEl.appendChild(btn);
+    }
+  }
+
+  function renderGrid(projects) {
+    const gridEl = document.getElementById("grid");
+    const emptyEl = document.getElementById("empty");
+
+    gridEl.innerHTML = "";
+
+    const filtered = projects.filter(p => projectMatchesFilter(p, activeFilter));
+
+    if (filtered.length === 0) {
+      emptyEl.style.display = "block";
+      return;
+    } else {
+      emptyEl.style.display = "none";
+    }
+
+    for (const p of filtered) {
+      const a = document.createElement("a");
+      a.className = "tile";
+      a.href = `./${p.slug}/`;
+
+      const thumb = document.createElement("div");
+      thumb.className = "thumb";
+
+      const img = document.createElement("img");
+      img.src = resolvePath(p.thumbnail);
+      img.alt = p.title ? `Thumbnail for ${p.title}` : "Project thumbnail";
+      img.loading = "lazy";
+
+      thumb.appendChild(img);
+
+      const meta = document.createElement("div");
+      meta.className = "tile-meta";
+
+      const h3 = document.createElement("h3");
+      h3.className = "tile-title";
+      h3.textContent = p.title || "Untitled Project";
+
+      const year = document.createElement("div");
+      year.className = "tile-year";
+      year.textContent = p.year || "";
+
+      meta.appendChild(h3);
+      meta.appendChild(year);
+
+      a.appendChild(thumb);
+      a.appendChild(meta);
+
+      gridEl.appendChild(a);
+    }
+  }
+
+  async function loadProjectsYml() {
+    const res = await fetch("./projects.yml", { cache: "no-store" });
+    if (!res.ok) throw new Error(`Failed to load projects.yml (${res.status})`);
+    const text = await res.text();
+    const data = jsyaml.load(text);
+
+    if (!data || !Array.isArray(data.projects)) {
+      throw new Error("projects.yml must contain a top-level 'projects:' list.");
+    }
+    return data.projects;
+  }
+
+  (async function init() {
+    try {
+      allProjects = await loadProjectsYml();
+      renderFilters(allProjects);
+      renderGrid(allProjects);
+    } catch (err) {
+      console.error(err);
+      const emptyEl = document.getElementById("empty");
+      emptyEl.style.display = "block";
+      emptyEl.textContent = "Could not load projects. Check console for details.";
+    }
+  })();
+</script>
