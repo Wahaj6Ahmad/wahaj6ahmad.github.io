@@ -18,7 +18,7 @@ projects:
     year: 2023
     slug: "vr-ar-remote-factory"
     tags: ["mechatronics"]
-    thumbnail: "/assets/img/projects/vr-ar-remote-factory.jpg"
+    thumbnail: "/assets/img/projects/vr/vr-main.png"
 
   - title: "Impact of a Robot’s Emotion Expressing Modality on People’s Cooperative Behaviour"
     year: 2022
