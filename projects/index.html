@@ -111,7 +111,17 @@
         thumb.className = "thumb";
 
         const img = document.createElement("img");
-        img.src = p.thumbnail || "";
+        const BASE = location.pathname.split("/projects/")[0] || ""; // "" for user site, "/repo" for repo site
+
+        function resolvePath(u) {
+          if (!u) return "";
+          if (/^https?:\/\//i.test(u)) return u;   // external URLs
+          if (u.startsWith("/")) return BASE + u;  // "/assets/.." -> "/repo/assets/.." on repo pages
+          return BASE + "/" + u;                  // "assets/.."  -> "/repo/assets/.."
+        }
+        
+        img.src = resolvePath(p.thumbnail);
+
         img.alt = p.title ? `Thumbnail for ${p.title}` : "Project thumbnail";
         img.loading = "lazy";
 
