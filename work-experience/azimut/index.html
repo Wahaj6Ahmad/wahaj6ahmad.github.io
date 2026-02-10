@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Azimut Wavetec — Hardware Engineer — Wahaj</title>
+  <meta name="description" content="Work experience at Azimut Wavetec (Azimut Labs): end-to-end hardware engineering for kiosks and electromechanical machines — BOMs, CAD checks, custom cables, module integration, QC, deployments, and field support." />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <style>
+    /* Horizontal image "slideshow" (scroll strip) */
+    .img-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 2px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .img-card {
+      flex: 0 0 auto;
+      width: 340px;
+      scroll-snap-align: start;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+    .img-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+    .img-card .ic-body {
+      padding: 10px 12px 12px 12px;
+    }
+    .img-card .ic-title {
+      font-weight: 800;
+      margin: 0 0 6px 0;
+      font-size: 0.95rem;
+    }
+    .img-card .ic-caption {
+      margin: 0;
+      opacity: 0.85;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    /* Small grid for “in-between” images */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 720px) {
+      .media-grid { grid-template-columns: 1fr; }
+      .img-card { width: 300px; }
+      .img-card img { height: 190px; }
+    }
+
+    /* Horizontal video gallery */
+    .video-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 2px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .video-card {
+      flex: 0 0 auto;
+      width: 340px;
+      scroll-snap-align: start;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+    .video-card iframe {
+      width: 100%;
+      height: 190px;
+      display: block;
+      border: 0;
+    }
+    .video-card .vc-body {
+      padding: 10px 12px 12px 12px;
+    }
+    .video-card .vc-title {
+      font-weight: 800;
+      margin: 0 0 6px 0;
+      font-size: 0.95rem;
+    }
+    .video-card .vc-meta {
+      margin: 0;
+      opacity: 0.85;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    /* Lightbox cursor */
+    img[data-lightbox] { cursor: zoom-in; }
+  </style>
+</head>
+
+<body>
+  <div id="siteHeader"></div>
+
+  <main class="container page-wrap project-page">
+    <a class="muted" href="/experience/">← Back to Experience</a>
+
+    <h1 style="margin: 10px 0 6px 0;">Azimut Wavetec (Azimut Labs)</h1>
+    <p class="lead" style="margin: 0;">
+      Hardware Engineer (Aug 2020 — Jul 2022) — end-to-end kiosk hardware, integration, QC, deployments, and field support
+    </p>
+
+    <!-- Hero -->
+    <div class="media-block media-hero">
+      <img
+        src="/assets/img/work-experience/azimut/my-first-deployment.png"
+        alt="First deployment photo"
+        loading="lazy"
+        data-lightbox
+      />
+      <div class="caption">My first deployment week: I learned fast that “hardware” includes people, schedules, and everything that can break at 2am.</div>
+    </div>
+
+    <!-- PRODUCTS STRIP (TOP OF PAGE) -->
+    <section class="section">
+      <div class="prose">
+        <h2 style="margin-bottom: 8px;">Products I worked on</h2>
+        <p style="margin-top: 0;">
+          These are some of the kiosk product lines and customer builds I supported. Most of my work sat at the messy intersection of
+          hardware + factory + software integration + deployments.
+        </p>
+      </div>
+
+      <div class="img-strip" aria-label="Products slideshow">
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/reverse-atm.webp" alt="Reverse ATM kiosk" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Reverse ATM</p>
+            <p class="ic-caption">Customer-facing kiosk builds where module integration and reliability mattered more than “perfect spec sheets.”</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/general-telco-design.jpg" alt="General telco kiosk CAD" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Telco kiosks (CAD review)</p>
+            <p class="ic-caption">I reviewed 3D CAD details before build approval: clearances, serviceability, mounting, cable paths, and “will a human hand fit here.”</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/telco-tele2.jpg" alt="Tele2 telco kiosk" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Tele2 telco kiosk</p>
+            <p class="ic-caption">Multi-module configurations where small integration mistakes become expensive in production.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/telco-telkom.jpg" alt="Telkom telco kiosk" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Telkom telco kiosk</p>
+            <p class="ic-caption">More telco builds: different customer requirements, same core engineering discipline.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/pickndrop1.jpg" alt="Pick and drop kiosk 1 column CAD" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Pick & Drop (1 column)</p>
+            <p class="ic-caption">A modular design direction: start small, then scale without rebuilding everything.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/pickndrop3.jpg" alt="Pick and drop kiosk 3 columns CAD" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Pick & Drop (3 columns)</p>
+            <p class="ic-caption">Same concept, expanded: stacked columns to support different capacity needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERVIEW / STORY -->
+    <section class="section">
+      <div class="prose">
+        <h2>What my job actually looked like</h2>
+        <p>
+          At Azimut Wavetec, I worked on electromechanical kiosks and machines that ship to real customers.
+          The work was very end-to-end. My involvement started the moment a customer order landed and usually ended
+          when the system was installed and stable in the field.
+        </p>
+
+        <p>
+          If I had to summarize the role in one line: I was the person who made sure the hardware solution was not only designed,
+          but also buildable, testable, documented, shipped, installable, and supportable. If it had a connector, a cable,
+          or a protocol… it eventually became my problem (and I mean that in a good way).
+        </p>
+
+        <div class="media-grid">
+          <div class="media-block">
+            <img
+              src="/assets/img/work-experience/azimut/field-work.png"
+              alt="Field work troubleshooting at customer site"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">Field support: troubleshooting breakdowns on-site with customer technical teams.</div>
+          </div>
+
+          <div class="media-block">
+            <img
+              src="/assets/img/work-experience/azimut/azimut_bwtest.png"
+              alt="Testing liveness camera IR"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">Module validation: testing liveness camera IR behavior before it becomes a production headache.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT I OWNED -->
+    <section class="section">
+      <div class="prose">
+        <h2>What I owned</h2>
+        <ul class="bullets">
+          <li><strong>Requirements handoff:</strong> confirmed hardware requirement documents with business analysts and project managers, and clarified edge cases early.</li>
+          <li><strong>BOM ownership:</strong> created BOMs, coordinated procurement details, and aligned part availability with build timelines.</li>
+          <li><strong>Factory + CAD coordination:</strong> sent specs to factory/CAD, reviewed 3D designs in detail, and approved builds only when serviceability + manufacturability made sense.</li>
+          <li><strong>Custom cabling:</strong> designed custom cable sets (lengths, materials, connectors), ordered through vendors, and verified wiring correctness in real assemblies.</li>
+          <li><strong>Module integration:</strong> sourced and integrated new hardware modules (POS terminals, scanners, EMV readers, biometric devices) for customer-specific features.</li>
+          <li><strong>Software bridging:</strong> worked with software teams by providing module documentation, communication protocols, and integration guidance (so hardware actually worked in production code).</li>
+          <li><strong>System images:</strong> prepared final OS images for factory installation across kiosks.</li>
+          <li><strong>QC mindset:</strong> created QC checklists, performed checks myself or supervised the process, and pushed fixes upstream (factory + software) to prevent repeats.</li>
+          <li><strong>Deployment + support:</strong> provided installation guides, supported overseas deployments, and handled breakdowns in the field.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CHEQUE ACCEPTOR (SEPARATE STRIP) -->
+    <section class="section">
+      <div class="prose">
+        <h2>Deep dive: Cheque acceptor work (QC + integration reality)</h2>
+        <p>
+          A lot of my day-to-day came down to machines like this: complicated assemblies with real wiring, real constraints,
+          and zero patience for “it should work.” I handled QC checks, wiring validation, and integration readiness.
+        </p>
+
+        <p style="margin-bottom: 0;">
+          Related video:
+          <a href="https://youtube.com/shorts/7Ejb5Z_v_Q0?feature=share" target="_blank" rel="noopener">
+            Field instructions — MEI Cash Acceptor (how to remove the main PCB)
+          </a>
+        </p>
+      </div>
+
+      <div class="img-strip" aria-label="Cheque acceptor slideshow">
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/ca.jpg" alt="Cheque acceptor machine overview" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Cheque acceptor (overview)</p>
+            <p class="ic-caption">QC starts with: can a technician understand and service it without destroying it.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/ca-front-door.jpg" alt="Cheque acceptor front door closed" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Front door</p>
+            <p class="ic-caption">Access points matter. If the door design is annoying, maintenance becomes “avoid it until it breaks.”</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/ca-front-door-open.jpg" alt="Cheque acceptor front door open" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Front door open</p>
+            <p class="ic-caption">QC checks included mechanical accessibility and safe cable routing.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/ca-lid-open.jpg" alt="Cheque acceptor lid open" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Lid open</p>
+            <p class="ic-caption">Internal access: verifying correct module fit, seating, and service clearances.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/ca-full-open.jpg" alt="Cheque acceptor fully open" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Full open state</p>
+            <p class="ic-caption">This is where wiring quality shows. Clean routing and strain relief prevent “mystery failures.”</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/ca-back.jpg" alt="Cheque acceptor back view" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Back side</p>
+            <p class="ic-caption">Verifying external ports, mounting points, and enclosure alignment.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/ca-wiring.jpg" alt="Cheque acceptor wiring view" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Inside wiring</p>
+            <p class="ic-caption">“Everyone knows what’s inside these kiosks now” — yep. This is where I spent a lot of time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULES STRIP (NOT DIRECTLY BELOW PRODUCTS) -->
+    <section class="section">
+      <div class="prose">
+        <h2>Modules I integrated</h2>
+        <p>
+          International projects often came down to integrating the right modules and making them reliable in production.
+          I worked with payment, scanning, identity, biometric, cash handling, power, and camera modules.
+        </p>
+        <p style="margin-bottom: 0;">
+          Related video:
+          <a href="https://youtube.com/shorts/rwqZb4P5YDc?feature=share" target="_blank" rel="noopener">
+            Talking through vault ideas (design thinking in the middle of real constraints)
+          </a>
+        </p>
+      </div>
+
+      <div class="img-strip" aria-label="Modules slideshow">
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/pax-pos.webp" alt="PAX POS terminal" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">PAX POS terminal</p>
+            <p class="ic-caption">POS integration + validation against customer specs and deployment constraints.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/check-scanner.avif" alt="Cheque scanner module" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Cheque scanner</p>
+            <p class="ic-caption">Scanner integration meant: physical fit, stable comms, and predictable error handling.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/mei-ca.png" alt="MEI cash acceptor" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">MEI cash acceptor</p>
+            <p class="ic-caption">Cash modules have their own personality. Documentation + service procedures were critical.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/snbc.png" alt="SNBC cash acceptor" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">SNBC cash acceptor</p>
+            <p class="ic-caption">Another cash module family: different behavior, same need for rigorous validation.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/simcard-acceptor.avif" alt="SIM card module" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">SIM dispenser module</p>
+            <p class="ic-caption">Mechanical module integration + safe handling + clear software signaling.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/passport.jpg" alt="Passport scanner module" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Passport scanner</p>
+            <p class="ic-caption">Identity modules: alignment, mounting, and tight integration with the software team.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/honeywell-biometric.webp" alt="Honeywell biometric scanner" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Honeywell biometric scanner</p>
+            <p class="ic-caption">Biometric module integration needs clean wiring, stable comms, and repeatable installation steps.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/emirati-reader.jpg" alt="Emirati reader" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Emirati card + biometric reader</p>
+            <p class="ic-caption">Special customer facilities meant new vendors, new constraints, and careful integration.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/camera.avif" alt="Liveness camera module" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Liveness camera</p>
+            <p class="ic-caption">Validating IR behavior and integration readiness before shipping.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/fujitsu-cdm.jpg" alt="Fujitsu cash dispenser module" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Fujitsu cash dispenser</p>
+            <p class="ic-caption">Cash dispenser integration: mechanical constraints + power + communication + safety checks.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/apc-ups.jpg" alt="APC UPS module" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">APC UPS</p>
+            <p class="ic-caption">Power reliability: not glamorous, but it saves deployments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PCBs STRIP -->
+    <section class="section">
+      <div class="prose">
+        <h2>Custom PCBs and internal electronics</h2>
+        <p>
+          Part of making these kiosks “production-ready” was working with custom boards and internal interfaces.
+          This includes boards used for integration, sensing, and control — the glue that makes modules behave like one system.
+        </p>
+      </div>
+
+      <div class="img-strip" aria-label="PCBs slideshow">
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/custom-pcb.jpg" alt="Custom kiosk PCB" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Custom kiosk PCB</p>
+            <p class="ic-caption">Core internal board used in kiosk builds I supported and validated.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/main-com-pcb.jpg" alt="Main communication PCB" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Main communication PCB</p>
+            <p class="ic-caption">Where protocols, ports, and “why is this not talking?” questions often converge.</p>
+          </div>
+        </div>
+
+        <div class="img-card">
+          <img src="/assets/img/work-experience/azimut/interface-pcb.png" alt="Interface PCB" loading="lazy" data-lightbox />
+          <div class="ic-body">
+            <p class="ic-title">Interface PCB</p>
+            <p class="ic-caption">Interface logic for sensors/LEDs/control — small board, big impact on reliability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACT + HIGHLIGHTS -->
+    <section class="section">
+      <div class="prose">
+        <h2>Highlights and impact</h2>
+        <ul class="bullets">
+          <li><strong>International readiness:</strong> integrated and validated modules (POS terminals, scanners, EMV readers, smart card/biometric devices) for international customer projects.</li>
+          <li><strong>Field-first debugging:</strong> troubleshot integration and deployment issues hands-on, performed root-cause analysis, and drove fixes with factory and software teams to prevent repeats.</li>
+          <li><strong>Repeatability:</strong> standardized installation and troubleshooting docs into clearer work instructions so deployments didn’t depend on “that one person who remembers everything.”</li>
+          <li><strong>People impact:</strong> mentored two junior engineers across hardware and technical support, helping them plan work and resolve issues faster.</li>
+        </ul>
+
+        <div class="media-grid">
+          <div class="media-block">
+            <img
+              src="/assets/img/work-experience/azimut/qc-camera.jpg"
+              alt="QC camera check"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">QC in practice: validating camera behavior during build checks.</div>
+          </div>
+
+          <div class="media-block">
+            <img
+              src="/assets/img/work-experience/azimut/snbc-repair.png"
+              alt="Repair work with module exposed"
+              loading="lazy"
+              data-lightbox
+            />
+            <div class="caption">Everyday reality: module repair and diagnostics with circuitry exposed. This is where you learn the system for real.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLBOX (COLLAPSIBLE) -->
+    <section class="section">
+      <details data-collapsible>
+        <summary>
+          <span>Toolbox (what I used day-to-day)</span>
+          <svg class="details-chev" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+
+        <div class="details-inner">
+          <div class="prose">
+            <ul class="bullets">
+              <li><strong>Hardware lifecycle:</strong> requirements review, BOM creation, vendor coordination, CAD review, custom cable design, assembly support</li>
+              <li><strong>Systems integration:</strong> module comms + software handoff (protocol docs, integration notes, troubleshooting steps)</li>
+              <li><strong>Production readiness:</strong> OS image preparation, QC checklists, installation guides, maintenance manuals</li>
+              <li><strong>Field support:</strong> on-site troubleshooting with customer technical teams, root-cause analysis, fix validation</li>
+            </ul>
+          </div>
+
+          <div class="see-less-row">
+            <button type="button" class="see-less-btn" data-see-less>See less</button>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- LEARNINGS (BOTTOM IMAGE) -->
+    <section class="section">
+      <div class="prose">
+        <h2>What I learned (and still carry)</h2>
+        <p>
+          The most important lesson: “end-to-end ownership” is a superpower. When you understand the system from order to deployment,
+          you make better design calls, you document better, and you debug faster because you know where the hidden assumptions live.
+        </p>
+      </div>
+
+      <div class="media-block">
+        <img
+          src="/assets/img/work-experience/azimut/learning.jpg"
+          alt="Learning photo"
+          loading="lazy"
+          data-lightbox
+        />
+        <div class="caption">An important thing I learned on the job.</div>
+      </div>
+    </section>
+
+    <!-- VIDEO GALLERY (BOTTOM) -->
+    <section class="section">
+      <div class="prose">
+        <h2>Video gallery</h2>
+        <p style="margin-bottom: 8px;">
+          Scroll sideways. Two quick clips that show the kind of hands-on work this job involved.
+        </p>
+      </div>
+
+      <div class="video-strip" aria-label="Azimut videos gallery">
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/7Ejb5Z_v_Q0"
+            title="Field instructions for MEI Cash Acceptor"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">MEI Cash Acceptor: service instructions</p>
+            <p class="vc-meta">How to remove the main PCB safely — the kind of “small detail” that saves hours in the field.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/rwqZb4P5YDc"
+            title="Talking about vault ideas"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+          <div class="vc-body">
+            <p class="vc-title">Vault ideas (design thinking)</p>
+            <p class="vc-meta">A short clip that captures how hardware design decisions happen in the middle of real constraints.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX OVERLAY -->
+  <div id="lightbox" class="lb-overlay" aria-hidden="true">
+    <div class="lb-content" role="dialog" aria-label="Image viewer">
+      <button class="lb-close" type="button" aria-label="Close image" id="lbClose">×</button>
+      <img class="lb-img" id="lbImg" alt="" />
+    </div>
+  </div>
+
+  <div id="siteFooter"></div>
+  <script src="/assets/js/layout.js" defer></script>
+
+  <script>
+    // Robust init: avoids breaking the lightbox if footer/year isn't present yet.
+    (function () {
+      function trySetYear() {
+        const yearEl = document.getElementById("year");
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+      }
+      trySetYear();
+      window.addEventListener("load", trySetYear);
+
+      // "See less" buttons: collapse parent <details> (event delegation)
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-see-less]");
+        if (!btn) return;
+        const details = btn.closest("details");
+        if (details) details.removeAttribute("open");
+        const summary = details ? details.querySelector("summary") : null;
+        if (summary) summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+
+      // Lightbox (event delegation so it works for all images, even in strips)
+      const lb = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      const lbClose = document.getElementById("lbClose");
+      if (!lb || !lbImg || !lbClose) return;
+
+      function openLightbox(src, alt) {
+        lbImg.src = src;
+        lbImg.alt = alt || "";
+        lb.classList.add("open");
+        lb.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lb.classList.remove("open");
+        lb.setAttribute("aria-hidden", "true");
+        lbImg.src = "";
+        lbImg.alt = "";
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("click", (e) => {
+        const img = e.target.closest("img[data-lightbox]");
+        if (img) openLightbox(img.currentSrc || img.src, img.alt);
+      });
+
+      lbClose.addEventListener("click", closeLightbox);
+      lb.addEventListener("click", (e) => { if (e.target === lb) closeLightbox(); });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lb.classList.contains("open")) closeLightbox();
+      });
+    })();
+  </script>
+</body>
+</html>
