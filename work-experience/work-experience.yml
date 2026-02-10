@@ -1,0 +1,25 @@
+# work-experience/work-experience.yml
+experiences:
+  - slug: azimut
+    role: Hardware / Field Engineer
+    company: Azimut Wavetec
+    duration: "TBD"
+    location: "TBD"
+    thumbnail: "/assets/img/work/azimut/thumb.jpg"
+    summary: "End-to-end hardware delivery, on-site installation, troubleshooting, QA, and stakeholder coordination."
+
+  - slug: studio-edwin
+    role: Embedded Systems Engineering Intern
+    company: Studio Edwin Van Der Heide
+    duration: "Sep 2023 — Jan 2024"
+    location: "Rotterdam, Netherlands"
+    thumbnail: "/assets/img/work/studio-edwin/thumb.jpg"
+    summary: "Integrated Raspberry Pi hardware + power electronics; built Linux services/scripts; validated long-term reliability."
+
+  - slug: ut-interaction-lab
+    role: Student Assistant (Interaction Lab)
+    company: University of Twente
+    duration: "TBD"
+    location: "Enschede, Netherlands"
+    thumbnail: "/assets/img/work/ut-lab/thumb.jpg"
+    summary: "Supported lab operations, demos, and events; hands-on setup and coordination in an HCI/robotics environment."
