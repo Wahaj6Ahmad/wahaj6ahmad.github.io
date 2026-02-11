@@ -25,9 +25,9 @@ experiences:
     summary: "Supported lab operations, demos, and events; hands-on setup and coordination in an HCI/robotics environment."
 
   - slug: pssec
-      role: Technical Educator
-      company: Pakistan Space Science Education Center
-      duration: "Jan 2023 - Jul 2024"
-      location: "Karachi, Pakistan"
-      thumbnail: "/assets/img/work-experience/pssec/rover1.png"
-      summary: "taught kids robotics through Scratch programming and making Mars rovers."
+    role: Technical Educator
+    company: Pakistan Space Science Education Center
+    duration: "Jan 2023 - Jul 2024"
+    location: "Karachi, Pakistan"
+    thumbnail: "/assets/img/work-experience/pssec/rover1.png"
+    summary: "taught kids robotics through Scratch programming and making Mars rovers."
