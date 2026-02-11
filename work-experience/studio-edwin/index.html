@@ -1,62 +1,213 @@
-<!-- work-experience/azimut/index.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Studio Edwin — Work Experience — Wahaj</title>
-  <meta name="description" content="Work experience: Azimut Wavetec." />
-
-  <!-- this page is 2 levels deep -->
-  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <title>Studio Edwin van der Heide — Embedded Systems Internship — Wahaj</title>
+  <meta name="description" content="Embedded Systems Engineering Intern at Studio Edwin van der Heide: autonomous recorder for Spiral of Time (installed at MACBA, Barcelona)." />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
 <body>
   <div id="siteHeader"></div>
 
   <main class="container page-wrap project-page">
-    <a class="muted" href="../">← Back to Work Experience</a>
+    <a class="muted" href="/work-experience/">← Back to Work Experience</a>
 
-    <h1 style="margin: 10px 0 6px 0;">Studio Edwin van der Heide</h1>
-    <p class="lead" style="margin: 0;">Internship - Embedded Systems Engineer</p>
+    <h1 style="margin: 10px 0 6px 0;">
+      <a
+        href="https://www.evdh.net/"
+        target="_blank"
+        rel="noopener"
+        style="color: inherit; text-decoration: underline; text-underline-offset: 3px;"
+      >
+        Studio Edwin van der Heide
+      </a>
+    </h1>
+    <p class="lead" style="margin: 0;">
+      Embedded Systems Engineering Intern (Sep 2023 - Jan 2024). Autonomous audio recorder for <em>Spiral of Time</em> (installed at MACBA)
+    </p>
 
-    <!-- Hero (optional) -->
-    <div class="media-block media-hero" style="margin-top: 18px;">
+    <!-- Main photo / hero -->
+    <div class="media-block media-hero">
       <img
-        src="/assets/img/work/azimut/header.jpg"
-        alt="Azimut Wavetec work photo"
+        src="/assets/img/work-experience/edwin/main.png"
+        alt="Spiral of Time / installation context photo"
         loading="lazy"
         data-lightbox
       />
-      <div class="caption">EMbedded engineering work (replace with your preferred photo).</div>
+      <div class="caption">
+        The Spiral of Time.
+      </div>
     </div>
 
     <section class="section">
       <div class="prose">
-        <h2>What I did</h2>
+        <p>
+          From <strong>Sep 2023 to Jan 2024</strong>, I interned at <strong>Studio Edwin van der Heide</strong> in Rotterdam.
+          The internship centered around <em>Spiral of Time</em>, a sound-based artwork that builds a long-term archive of a place by recording
+          <strong>one minute of ambient audio every hour</strong>, day and night, over multiple years. :contentReference[oaicite:0]{index=0}
+        </p>
+
+        <p>
+          The work is now installed at the <strong>Museu d'Art Contemporani de Barcelona (MACBA)</strong>, where a dedicated microphone setup
+          registers the ambient sound of Plaça dels Àngels and feeds the growing sound library that visitors can explore. 
+          You can read the installation description here:
+          <a href="https://www.macba.cat/en/spiral-of-time-placa-dels-angels/" target="_blank" rel="noopener"
+             style="text-decoration: underline; text-underline-offset: 3px;">
+            MACBA — Spiral of Time (Plaça dels Àngels)
+          </a>.
+        </p>
+
+        <p>
+          My job was to help build the <strong>Autonomous Audio Recorder (AAR)</strong> — the part of the system that makes this project possible.
+          In simple terms: it had to wake up on schedule, record clean audio, upload files, and keep running for long periods with minimal human help. :contentReference[oaicite:2]{index=2}
+        </p>
+
+        <p>
+          Some implementation details are <strong>classified</strong> (specific modules and internal configuration), but the engineering constraints,
+          trade-offs, and reliability work were very real.
+        </p>
+
+        <h2 style="margin: 18px 0 10px 0;">What I built (high-level)</h2>
+        <p>
+          The AAR is a solar-powered, Linux-based embedded system designed for <strong>reliable long-term autonomy</strong>.
+          It records audio at strict hourly intervals, generates metadata for the web experience, and uploads everything to a remote server.
+          Remote access was a must, because the system is meant to run at a distance. :contentReference[oaicite:3]{index=3}
+        </p>
+
+        <h2 style="margin: 18px 0 10px 0;">The problems that mattered</h2>
         <ul class="bullets">
-          <li>Integrated and validated an autonomous embedded system combining hardware, power management, and Linux-based software for long-term deployment.</li>
-          <li>Integrated Raspberry Pi–based hardware with power electronics and peripherals; ran extended unattended tests to validate stability and capture failure modes.</li>
-          <li>Developed and maintained scripts and services for scheduling, logging, and remote access; improved testability through automated data transfer and traceable run logs.</li>
-          <li>Troubleshot power, timing, and reliability issues; implemented and documented corrective changes in the hardware–software integration to improve robustness.</li>
+          <li>
+            <strong>Timing reliability:</strong> the recorder had to wake up at the correct time every hour, without drifting, and recover after power loss. :contentReference[oaicite:4]{index=4}
+          </li>
+          <li>
+            <strong>Power and autonomy:</strong> it had to survive real weather and battery constraints, and avoid corrupting data during brownouts or sudden shutdowns. :contentReference[oaicite:5]{index=5}
+          </li>
+          <li>
+            <strong>Audio quality:</strong> recordings had to be clean and consistent — no random glitches, even under system load. :contentReference[oaicite:6]{index=6}
+          </li>
+          <li>
+            <strong>Remote maintenance:</strong> we needed reliable remote access for debugging and updates while keeping the system secure. :contentReference[oaicite:7]{index=7}
+          </li>
         </ul>
 
-        <!-- <h2 style="margin-top: 22px;">Highlights</h2>
-        <ul class="bullets">
-          <li>TBD — “Installed X systems on-site” / “Reduced downtime by …” / “Improved test process …”.</li>
-        </ul> -->
+        <h2 style="margin: 18px 0 10px 0;">How I approached it</h2>
+        <p>
+          The project was built through <strong>iterative prototyping and daily robustness testing</strong>.
+          We tried approaches, hit edge cases, and refined the system until it behaved consistently. :contentReference[oaicite:8]{index=8}
+          One example: early wake-up solutions were unreliable in practice, so we changed strategy and moved to a simpler, more robust approach based on
+          RTC alarm scheduling and careful shutdown sequencing. :contentReference[oaicite:9]{index=9}
+        </p>
 
-        <h2 style="margin-top: 22px;">Tools & tech</h2>
+        <p>
+          On the software side, I worked with a mix of Linux services, shell scripts, Python scripts, and audio tooling.
+          The system maintains logs for traceability and uses efficient file transfer so uploads stay reliable even with unstable connections. :contentReference[oaicite:10]{index=10}
+        </p>
+
+        <h2 style="margin: 18px 0 10px 0;">What shipped</h2>
+        <p>
+          The final system was able to run autonomously and record consistently at the required hourly schedule during extended testing,
+          with high-quality audio and reliable upload behavior. :contentReference[oaicite:11]{index=11}
+          We also packaged the software setup into a repeatable installation image and documentation so the system could be reproduced and scaled. :contentReference[oaicite:12]{index=12}
+        </p>
+
+        <h2 style="margin: 18px 0 10px 0;">My biggest takeaway</h2>
+        <p>
+          This internship changed how I think about engineering. I came in expecting “interactive art design” and ended up deep in reliability,
+          autonomy, and deployment realities — and I loved it. It also showed me something I didn’t appreciate enough before:
+          technology can be built for <strong>purely creative goals</strong>, and still demand serious engineering. 
+        </p>
+
+        <p style="margin-top: 10px;">
+          A personal milestone: seeing this work installed at MACBA felt unreal. It’s one thing to prototype; it’s another to ship something that must
+          keep working in the real world for years.
+        </p>
+
+        <h2 style="margin: 18px 0 10px 0;">Why this matters for my robotics path</h2>
         <ul class="bullets">
-          <li>Linux, Python, C++, Bash, Git, Docker, Raspberry Pi, Arduino, ROS2.</li>
+          <li><strong>Systems integration:</strong> hardware + Linux services + scheduling + networking as one reliable product loop.</li>
+          <li><strong>Reliability mindset:</strong> treating edge cases as first-class requirements (power loss, drift, timing, silent failures).</li>
+          <li><strong>Remote deployment thinking:</strong> logs, maintainability, secure access, and reproducibility.</li>
         </ul>
+
+        <p style="margin-top: 10px;">
+          If you want the short version of my LinkedIn post: I’m proud this went live, and I’m still a bit surprised how much joy I got from making
+          a box wake up on time.
+        </p>
+      </div>
+
+      <!-- Bottom photo -->
+      <div class="media-block" style="margin-top: 14px;">
+        <img
+          src="/assets/img/work-experience/edwin/macba.jpg"
+          alt="Workbench / prototype / field-ready setup photo"
+          loading="lazy"
+          data-lightbox
+        />
+        <div class="caption">
+          The Autonomous Audio Recorder is currently installed in Plaça dels Àngels.
+        </div>
       </div>
     </section>
   </main>
 
-  <div id="siteFooter"></div>
-  <script src="../../assets/js/layout.js" defer></script>
+  <!-- LIGHTBOX OVERLAY -->
+  <div id="lightbox" class="lb-overlay" aria-hidden="true">
+    <div class="lb-content" role="dialog" aria-label="Image viewer">
+      <button class="lb-close" type="button" aria-label="Close image" id="lbClose">×</button>
+      <img class="lb-img" id="lbImg" alt="" />
+    </div>
+  </div>
 
-  <!-- Optional: if you already have lightbox JS on project pages, you can reuse it here later -->
+  <div id="siteFooter"></div>
+  <script src="/assets/js/layout.js" defer></script>
+
+  <script>
+    // "See less" buttons support (safe even if none exist on this page)
+    document.querySelectorAll("[data-see-less]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const details = e.target.closest("details");
+        if (details) details.removeAttribute("open");
+        const summary = details ? details.querySelector("summary") : null;
+        if (summary) summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    });
+
+    // Lightbox
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbClose = document.getElementById("lbClose");
+
+    function openLightbox(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || "";
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+      lbImg.src = "";
+      lbImg.alt = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("img[data-lightbox]").forEach((img) => {
+      img.addEventListener("click", () => openLightbox(img.src, img.alt));
+    });
+
+    lbClose.addEventListener("click", closeLightbox);
+
+    lb.addEventListener("click", (e) => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lb.classList.contains("open")) closeLightbox();
+    });
+  </script>
 </body>
 </html>
