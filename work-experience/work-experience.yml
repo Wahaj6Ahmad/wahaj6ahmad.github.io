@@ -13,7 +13,7 @@ experiences:
     company: Studio Edwin Van Der Heide
     duration: "Sep 2023 — Jan 2024"
     location: "Rotterdam, Netherlands"
-    thumbnail: "/assets/img/work-experience/spiral-of-time/main.jfif"
+    thumbnail: "/assets/img/work-experience/spiral-of-time/main.png"
     summary: "Integrated Raspberry Pi hardware + power electronics; built Linux services/scripts; validated long-term reliability."
 
   - slug: interaction-lab
@@ -25,7 +25,7 @@ experiences:
     summary: "Supported lab operations, demos, and events; hands-on setup and coordination in an HCI/robotics environment."
 
   - slug: pssec
-      role: 
+      role: Technical Educator
       company: Pakistan Space Science Education Center
       duration: "Jan 2023 - Jul 2024"
       location: "Karachi, Pakistan"
