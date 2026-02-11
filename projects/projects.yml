@@ -2,7 +2,7 @@
 # The order in this list is the order shown on the page.
 
 projects:
-  - title: "BSc Thesis: Autonomous Robot With Door Opening Mechanism and Traversal"
+  - title: "Roarbot: Autonomous Robot With Door Opening Mechanism and Traversal"
     year: 2020
     slug: "bachelors-thesis-door-robot"
     tags: ["mechatronics"]
