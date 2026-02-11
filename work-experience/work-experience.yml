@@ -3,9 +3,9 @@ experiences:
   - slug: azimut
     role: Hardware / Field Engineer
     company: Azimut Wavetec
-    duration: "TBD"
-    location: "TBD"
-    thumbnail: "/assets/img/work/azimut/thumb.jpg"
+    duration: "Aug 2020 - Jul 2022"
+    location: "Karachi, Pakistan"
+    thumbnail: "/assets/img/work-experience/azimut/snbc-repair.png"
     summary: "End-to-end hardware delivery, on-site installation, troubleshooting, QA, and stakeholder coordination."
 
   - slug: studio-edwin
@@ -13,13 +13,21 @@ experiences:
     company: Studio Edwin Van Der Heide
     duration: "Sep 2023 — Jan 2024"
     location: "Rotterdam, Netherlands"
-    thumbnail: "/assets/img/work/studio-edwin/thumb.jpg"
+    thumbnail: "/assets/img/work-experience/spiral-of-time/main.jfif"
     summary: "Integrated Raspberry Pi hardware + power electronics; built Linux services/scripts; validated long-term reliability."
 
   - slug: ut-interaction-lab
-    role: Student Assistant (Interaction Lab)
+    role: Workshop & Event Team (Interaction Lab)
     company: University of Twente
-    duration: "TBD"
+    duration: "Jan 2023 - Jul 2024"
     location: "Enschede, Netherlands"
-    thumbnail: "/assets/img/work/ut-lab/thumb.jpg"
+    thumbnail: "/assets/img/work-experience/interaction-lab/main-team.png"
     summary: "Supported lab operations, demos, and events; hands-on setup and coordination in an HCI/robotics environment."
+
+  - slug: pssec
+      role: 
+      company: Pakistan Space Science Education Center
+      duration: "Jan 2023 - Jul 2024"
+      location: "Karachi, Pakistan"
+      thumbnail: "/assets/img/work-experience/pssec/rover1.png"
+      summary: "taught kids robotics through Scratch programming and making Mars rovers."
