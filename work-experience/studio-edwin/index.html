@@ -6,6 +6,102 @@
   <title>Studio Edwin van der Heide — Embedded Systems Internship — Wahaj</title>
   <meta name="description" content="Embedded Systems Engineering Intern at Studio Edwin van der Heide: autonomous recorder for Spiral of Time (installed at MACBA, Barcelona)." />
   <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <style>
+    /* Horizontal image "slideshow" (scroll strip) */
+    .img-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 2px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .img-card {
+      flex: 0 0 auto;
+      width: 340px;
+      scroll-snap-align: start;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+    .img-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+    .img-card .ic-body {
+      padding: 10px 12px 12px 12px;
+    }
+    .img-card .ic-title {
+      font-weight: 800;
+      margin: 0 0 6px 0;
+      font-size: 0.95rem;
+    }
+    .img-card .ic-caption {
+      margin: 0;
+      opacity: 0.85;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    /* Small grid for “in-between” images */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 720px) {
+      .media-grid { grid-template-columns: 1fr; }
+      .img-card { width: 300px; }
+      .img-card img { height: 190px; }
+    }
+
+    /* Horizontal video gallery */
+    .video-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 2px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .video-card {
+      flex: 0 0 auto;
+      width: 340px;
+      scroll-snap-align: start;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+    .video-card iframe {
+      width: 100%;
+      height: 190px;
+      display: block;
+      border: 0;
+    }
+    .video-card .vc-body {
+      padding: 10px 12px 12px 12px;
+    }
+    .video-card .vc-title {
+      font-weight: 800;
+      margin: 0 0 6px 0;
+      font-size: 0.95rem;
+    }
+    .video-card .vc-meta {
+      margin: 0;
+      opacity: 0.85;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    /* Lightbox cursor */
+    img[data-lightbox] { cursor: zoom-in; }
+  </style>
 </head>
 
 <body>
@@ -25,19 +121,19 @@
       </a>
     </h1>
     <p class="lead" style="margin: 0;">
-      Embedded Systems Engineering Intern (Sep 2023 - Jan 2024). Autonomous audio recorder for <em>Spiral of Time</em> (installed at MACBA)
+      Embedded Systems Engineering Intern (Sep 2023 - Jan 2024): Autonomous audio recorder for <em>Spiral of Time</em> (installed at MACBA)
     </p>
 
     <!-- Main photo / hero -->
     <div class="media-block media-hero">
       <img
-        src="/assets/img/work-experience/edwin/main.png"
+        src="/assets/img/work-experience/spiral-of-time/main.png"
         alt="Spiral of Time / installation context photo"
         loading="lazy"
         data-lightbox
       />
       <div class="caption">
-        The Spiral of Time.
+        The spiral-shaped interface of Spiral of Time - photo © Edwin van der Heide
       </div>
     </div>
 
@@ -46,7 +142,7 @@
         <p>
           From <strong>Sep 2023 to Jan 2024</strong>, I interned at <strong>Studio Edwin van der Heide</strong> in Rotterdam.
           The internship centered around <em>Spiral of Time</em>, a sound-based artwork that builds a long-term archive of a place by recording
-          <strong>one minute of ambient audio every hour</strong>, day and night, over multiple years. :contentReference[oaicite:0]{index=0}
+          <strong>one minute of ambient audio every hour</strong>, day and night, over multiple years.
         </p>
 
         <p>
@@ -61,7 +157,7 @@
 
         <p>
           My job was to help build the <strong>Autonomous Audio Recorder (AAR)</strong> — the part of the system that makes this project possible.
-          In simple terms: it had to wake up on schedule, record clean audio, upload files, and keep running for long periods with minimal human help. :contentReference[oaicite:2]{index=2}
+          In simple terms: it had to wake up on schedule, record clean audio, upload files, and keep running for long periods with minimal human help.
         </p>
 
         <p>
@@ -73,43 +169,41 @@
         <p>
           The AAR is a solar-powered, Linux-based embedded system designed for <strong>reliable long-term autonomy</strong>.
           It records audio at strict hourly intervals, generates metadata for the web experience, and uploads everything to a remote server.
-          Remote access was a must, because the system is meant to run at a distance. :contentReference[oaicite:3]{index=3}
+          Remote access was a must, because the system is meant to run at a distance.
         </p>
 
-        <h2 style="margin: 18px 0 10px 0;">The problems that mattered</h2>
+        <h2 style="margin: 18px 0 10px 0;">The Problems</h2>
         <ul class="bullets">
           <li>
-            <strong>Timing reliability:</strong> the recorder had to wake up at the correct time every hour, without drifting, and recover after power loss. :contentReference[oaicite:4]{index=4}
+            <strong>Timing reliability:</strong> the recorder had to wake up at the correct time every hour, without drifting, and recover after power loss.
           </li>
           <li>
-            <strong>Power and autonomy:</strong> it had to survive real weather and battery constraints, and avoid corrupting data during brownouts or sudden shutdowns. :contentReference[oaicite:5]{index=5}
+            <strong>Power and autonomy:</strong> it had to survive real weather and battery constraints, and avoid corrupting data during brownouts or sudden shutdowns.
           </li>
           <li>
-            <strong>Audio quality:</strong> recordings had to be clean and consistent — no random glitches, even under system load. :contentReference[oaicite:6]{index=6}
-          </li>
+            <strong>Audio quality:</strong> recordings had to be clean and consistent — no random glitches, even under system load. 
           <li>
-            <strong>Remote maintenance:</strong> we needed reliable remote access for debugging and updates while keeping the system secure. :contentReference[oaicite:7]{index=7}
-          </li>
+            <strong>Remote maintenance:</strong> we needed reliable remote access for debugging and updates while keeping the system secure. 
         </ul>
 
-        <h2 style="margin: 18px 0 10px 0;">How I approached it</h2>
+        <h2 style="margin: 18px 0 10px 0;">My approach</h2>
         <p>
           The project was built through <strong>iterative prototyping and daily robustness testing</strong>.
-          We tried approaches, hit edge cases, and refined the system until it behaved consistently. :contentReference[oaicite:8]{index=8}
+          We tried approaches, hit edge cases, and refined the system until it behaved consistently.
           One example: early wake-up solutions were unreliable in practice, so we changed strategy and moved to a simpler, more robust approach based on
-          RTC alarm scheduling and careful shutdown sequencing. :contentReference[oaicite:9]{index=9}
+          RTC alarm scheduling and careful shutdown sequencing.
         </p>
 
         <p>
           On the software side, I worked with a mix of Linux services, shell scripts, Python scripts, and audio tooling.
-          The system maintains logs for traceability and uses efficient file transfer so uploads stay reliable even with unstable connections. :contentReference[oaicite:10]{index=10}
+          The system maintains logs for traceability and uses efficient file transfer so uploads stay reliable even with unstable connections.
         </p>
 
-        <h2 style="margin: 18px 0 10px 0;">What shipped</h2>
+        <h2 style="margin: 18px 0 10px 0;">Final Product</h2>
         <p>
           The final system was able to run autonomously and record consistently at the required hourly schedule during extended testing,
-          with high-quality audio and reliable upload behavior. :contentReference[oaicite:11]{index=11}
-          We also packaged the software setup into a repeatable installation image and documentation so the system could be reproduced and scaled. :contentReference[oaicite:12]{index=12}
+          with high-quality audio and reliable upload behavior.
+          We also packaged the software setup into a repeatable installation image and documentation so the system could be reproduced and scaled.
         </p>
 
         <h2 style="margin: 18px 0 10px 0;">My biggest takeaway</h2>
@@ -121,8 +215,75 @@
 
         <p style="margin-top: 10px;">
           A personal milestone: seeing this work installed at MACBA felt unreal. It’s one thing to prototype; it’s another to ship something that must
-          keep working in the real world for years.
+          keep working in the real world for years. The next destination for Spiral of Time is the Amazon forest in Brazil! Feels surreal!
         </p>
+
+        <!-- <section class="section">
+          <div class="prose">
+            <h2 style="margin-bottom: 8px;">Products I worked on</h2>
+            <p style="margin-top: 0;">
+              These are some of the kiosk product lines and customer builds I supported. Most of my work sat at the messy intersection of
+              hardware + factory + software integration + deployments.
+            </p>
+          </div> -->
+    
+          <div class="img-strip" aria-label="pictures slideshow">
+            <div class="img-card">
+              <img src="/assets/img/work-experience/spiral-of-time/install1.jpg" alt="installation 1" loading="lazy" data-lightbox />
+              <div class="ic-body">
+                <!-- <p class="ic-title"></p> -->
+                <p class="ic-caption">The exhibition of Spiral of Time at MACBA - photo © Edwin van der Heide</p>
+              </div>
+            </div>
+    
+            <div class="img-card">
+              <img src="/assets/img/work-experience/spiral-of-time/install2.jpg" alt="installation 2" loading="lazy" data-lightbox />
+              <div class="ic-body">
+                <!-- <p class="ic-title">Telco kiosks CAD</p> -->
+                <p class="ic-caption">The exhibition of Spiral of Time at MACBA - photo © Edwin van der Heide</p>
+              </div>
+            </div>
+    
+            <div class="img-card">
+              <img src="/assets/img/work-experience/spiral-of-time/install3.jpg" alt="installation 3" loading="lazy" data-lightbox />
+              <div class="ic-body">
+                <!-- <p class="ic-title">Tele2 telco kiosk</p> -->
+                <p class="ic-caption">The exhibition of Spiral of Time at File Festival 2025 - © photo Camila Picolo</p>
+              </div>
+            </div>
+    
+            <div class="img-card">
+              <img src="/assets/img/work-experience/spiral-of-time/install4.jpg" alt="installation 4" loading="lazy" data-lightbox />
+              <div class="ic-body">
+                <!-- <p class="ic-title">Telkom telco kiosk</p> -->
+                <p class="ic-caption">The exhibition of Spiral of Time at File Festival 2025 - © photo Camila Picolo</p>
+              </div>
+            </div>
+    
+            <div class="img-card">
+              <img src="/assets/img/work-experience/spiral-of-time/install5.jpg" alt="installation 5" loading="lazy" data-lightbox />
+              <div class="ic-body">
+                <!-- <p class="ic-title">Pick n Place (1 column)</p> -->
+                <p class="ic-caption">Plaça dels Àngels - photo © Edwin van der Heide</p>
+              </div>
+            </div>
+    
+            <div class="img-card">
+              <img src="/assets/img/work-experience/spiral-of-time/amazon.jpg" alt="amazon" loading="lazy" data-lightbox />
+              <div class="ic-body">
+                <!-- <p class="ic-title">Pick n Place (3 columns)</p> -->
+                <p class="ic-caption">Spiral of Time installed in the Amazon Rainforest - photo © Edwin van der Heide</p>
+              </div>
+
+              <div class="img-card">
+                <img src="/assets/img/work-experience/spiral-of-time/amazon2.jpg" alt="amazon" loading="lazy" data-lightbox />
+                <div class="ic-body">
+                  <!-- <p class="ic-title">Pick n Place (3 columns)</p> -->
+                  <p class="ic-caption">Spiral of Time installed in the Amazon Rainforest - photo © Edwin van der Heide</p>
+                </div>
+            </div>
+          </div>
+        <!-- </section> -->
 
         <h2 style="margin: 18px 0 10px 0;">Why this matters for my robotics path</h2>
         <ul class="bullets">
@@ -130,23 +291,19 @@
           <li><strong>Reliability mindset:</strong> treating edge cases as first-class requirements (power loss, drift, timing, silent failures).</li>
           <li><strong>Remote deployment thinking:</strong> logs, maintainability, secure access, and reproducibility.</li>
         </ul>
-
-        <p style="margin-top: 10px;">
-          If you want the short version of my LinkedIn post: I’m proud this went live, and I’m still a bit surprised how much joy I got from making
-          a box wake up on time.
-        </p>
       </div>
 
       <!-- Bottom photo -->
       <div class="media-block" style="margin-top: 14px;">
         <img
-          src="/assets/img/work-experience/edwin/macba.jpg"
+          src="/assets/img/work-experience/spiral-of-time/macba.jpg"
           alt="Workbench / prototype / field-ready setup photo"
           loading="lazy"
           data-lightbox
         />
         <div class="caption">
-          The Autonomous Audio Recorder is currently installed in Plaça dels Àngels.
+          Plaça dels Àngels: 
+          View of the microphone installed on the facade of the MACBA’s Research and Documentation Centre. Photo: Edwin van der Heide, (c) 2024
         </div>
       </div>
     </section>
