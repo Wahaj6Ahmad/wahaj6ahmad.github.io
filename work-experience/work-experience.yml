@@ -16,7 +16,7 @@ experiences:
     thumbnail: "/assets/img/work-experience/spiral-of-time/main.jfif"
     summary: "Integrated Raspberry Pi hardware + power electronics; built Linux services/scripts; validated long-term reliability."
 
-  - slug: ut-interaction-lab
+  - slug: interaction-lab
     role: Workshop & Event Team (Interaction Lab)
     company: University of Twente
     duration: "Jan 2023 - Jul 2024"
